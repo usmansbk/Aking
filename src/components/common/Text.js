@@ -12,17 +12,21 @@ const styles = StyleSheet.create({
     fontFamily: 'Medium',
     fontSize: 18,
   },
+  button: {
+    fontFamily: 'Demi',
+    fontSize: 18,
+  },
 });
 
 export default function AkingText({
   children,
   variant = 'body',
-  color = 'text',
+  color = 'main',
   style = {},
 }) {
   const theme = useTheme();
   return (
-    <Text style={[styles[variant], {color: theme.palatte[color].main}, style]}>
+    <Text style={[styles[variant], {color: theme.palatte.text[color]}, style]}>
       {children}
     </Text>
   );

@@ -9,6 +9,7 @@ const colors = {
   green: '#5ABB56',
   pink: '#E42B6A',
   yellow: '#F4CA8F',
+  gray: '#9E9E9E',
 };
 
 export const theme = {
@@ -16,14 +17,23 @@ export const theme = {
   palatte: {
     primary: {
       main: colors.red,
+      contrast: colors.white,
     },
     secondary: {
       main: colors.blue,
       dark: colors.darkBlue,
+      contrast: colors.white,
+    },
+    accent: {
+      main: colors.white,
+      dark: colors.gray,
+      contrast: colors.black,
     },
     text: {
       main: colors.black,
       contrast: colors.white,
+      primary: colors.red,
+      secondary: colors.blue,
     },
   },
   spacing: {
@@ -34,7 +44,8 @@ export const theme = {
     xl: 32,
   },
   shape: {
-    radius: 6,
+    radius: 4,
+    elevation: 4,
   },
 };
 
