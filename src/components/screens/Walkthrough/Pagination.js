@@ -40,10 +40,10 @@ function Dot({currentIndex, index}) {
 }
 export default function Pagination({currentIndex}) {
   const theme = useTheme();
-  const dot = new Array(3).fill(0);
+  const dots = new Array(3).fill(0);
   return (
     <View style={[styles.container, {padding: theme.spacing.s}]}>
-      {dot.map((_, index) => (
+      {dots.map((_, index) => (
         <Dot key={index} currentIndex={currentIndex} index={index} />
       ))}
     </View>
