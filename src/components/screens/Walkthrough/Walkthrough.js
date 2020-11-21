@@ -71,7 +71,6 @@ export default function Walkthrough() {
       </Animated.ScrollView>
       <Pagination
         currentIndex={Animated.divide(scrollX, width)}
-        scrollX={scrollX}
         pages={slides.length}
       />
       <View style={styles.footer}>
