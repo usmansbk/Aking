@@ -42,7 +42,6 @@ export default function AkingButton({
       style={[
         styles.container,
         {
-          margin: theme.spacing.xs,
           marginVertical: theme.spacing.m,
           elevation: theme.shape.elevation,
           backgroundColor: colors.main,

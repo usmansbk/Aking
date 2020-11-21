@@ -10,6 +10,10 @@ export default function Navigation() {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Walkthrough" component={Walkthrough} />
       <Stack.Screen name="SignIn" component={Authentication.SignIn} />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={Authentication.ForgotPassword}
+      />
     </Stack.Navigator>
   );
 }

@@ -40,7 +40,11 @@ export default function SignIn({navigation}) {
             secureTextEntry
           />
           <View style={styles.forgotPassword}>
-            <Button variant="text">Forgot password</Button>
+            <Button
+              variant="text"
+              onPress={() => navigation.navigate('ForgotPassword')}>
+              Forgot password
+            </Button>
           </View>
         </View>
         <Button color="primary">Log In</Button>
