@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import ThemeContext, {theme} from '@config/theme';
+import ThemeProvider, {theme} from '@config/theme';
 import {Text} from '@components/common';
 
 export default function App() {
@@ -12,8 +12,8 @@ export default function App() {
   }, []);
 
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeProvider value={theme}>
       <Text>Hello</Text>
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
 }

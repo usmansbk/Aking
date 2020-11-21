@@ -50,4 +50,4 @@ export function useTheme() {
   return useContext(ThemeContext);
 }
 
-export default ThemeContext;
+export default ThemeContext.Provider;
