@@ -6,10 +6,11 @@ const colors = {
   blue: '#6074f9',
   darkBlue: '#292e4e',
   black: '#313131',
+  darkest: '#000',
   green: '#5ABB56',
   pink: '#E42B6A',
   yellow: '#F4CA8F',
-  gray: '#9E9E9E',
+  gray: '#979797',
 };
 
 export const theme = {

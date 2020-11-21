@@ -3,6 +3,7 @@ import {StyleSheet, StatusBar, Dimensions, View, Animated} from 'react-native';
 import {Button} from '@components/common';
 import {useTheme} from '@config/theme';
 import Slide from './Slide';
+import Pagination from './Pagination';
 import slides from './slides';
 
 const {width, height} = Dimensions.get('window');
@@ -14,11 +15,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   footer: {
+    justifyContent: 'flex-end',
     height: height * 0.4,
-    justifyContent: 'center',
   },
   footerImage: {
     ...StyleSheet.absoluteFillObject,
+    width,
+  },
+  buttons: {
+    height: height * 0.3,
+    justifyContent: 'center',
   },
 });
 
@@ -58,6 +64,7 @@ export default function Walkthrough() {
           return <Slide key={index} {...slide} />;
         })}
       </Animated.ScrollView>
+      <Pagination scrollX={scrollX} />
       <View style={styles.footer}>
         {slides.map((slide, index) => (
           <Animated.Image
@@ -77,10 +84,12 @@ export default function Walkthrough() {
           />
         ))}
         <View
-          style={{
-            padding: theme.spacing.xl,
-            marginVertical: theme.spacing.xl,
-          }}>
+          style={[
+            styles.buttons,
+            {
+              padding: theme.spacing.xl,
+            },
+          ]}>
           <Button variant="primary">Get Started</Button>
           <Button variant="text" textColor="white">
             Log In

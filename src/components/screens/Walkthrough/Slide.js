@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Slide({title, subtitle, image, footer}) {
+export default function Slide({title, subtitle, image}) {
   return (
     <View style={styles.container}>
       <View style={styles.body}>
