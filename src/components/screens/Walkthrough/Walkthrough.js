@@ -7,6 +7,9 @@ import Pagination from './Pagination';
 import slides from './slides';
 
 const {width, height} = Dimensions.get('window');
+const FOOTER_HEIGHT = height * 0.4;
+const IMAGE_HEIGHT = height * 0.5;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -16,11 +19,12 @@ const styles = StyleSheet.create({
   },
   footer: {
     justifyContent: 'flex-end',
-    height: height * 0.4,
+    height: FOOTER_HEIGHT,
   },
   footerImage: {
     ...StyleSheet.absoluteFillObject,
     width,
+    height: IMAGE_HEIGHT,
   },
   buttons: {
     height: height * 0.3,
