@@ -1,18 +1,7 @@
 import React, {useEffect} from 'react';
-import {Text, StyleSheet} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-
-const styles = StyleSheet.create({
-  demi: {
-    fontFamily: 'Demi',
-  },
-  regular: {
-    fontFamily: 'Regular',
-  },
-  medium: {
-    fontFamily: 'Medium',
-  },
-});
+import ThemeContext, {theme} from '@config/theme';
+import {Text} from '@components/common';
 
 export default function App() {
   useEffect(() => {
@@ -23,10 +12,8 @@ export default function App() {
   }, []);
 
   return (
-    <>
-      <Text style={styles.demi}>Aking</Text>
-      <Text style={styles.medium}>Aking</Text>
-      <Text style={styles.regular}>Aking</Text>
-    </>
+    <ThemeContext.Provider value={theme}>
+      <Text>Hello</Text>
+    </ThemeContext.Provider>
   );
 }

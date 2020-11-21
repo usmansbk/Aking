@@ -1,3 +1,5 @@
+import React, {useContext} from 'react';
+
 const colors = {
   white: '#fff',
   red: '#f96060',
@@ -9,7 +11,7 @@ const colors = {
   yellow: '#F4CA8F',
 };
 
-const theme = {
+export const theme = {
   colors,
   palatte: {
     primary: {
@@ -24,6 +26,12 @@ const theme = {
       contrast: colors.white,
     },
   },
+  fonts: {
+    regular: {
+      fontFamily: 'Regular',
+      fontSize: 20,
+    },
+  },
   spacing: {
     xs: 2,
     s: 4,
@@ -35,3 +43,11 @@ const theme = {
     radius: 6,
   },
 };
+
+const ThemeContext = React.createContext(theme);
+
+export function useTheme() {
+  return useContext(ThemeContext);
+}
+
+export default ThemeContext;
