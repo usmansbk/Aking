@@ -1,21 +1,6 @@
 import React from 'react';
-import {Image} from 'react-native';
+import ArrowLeft from '@assets/svgs/ArrowLeft.svg';
 
-function getSource(name) {
-  switch (name) {
-    case 'arrow-back':
-      return require('@assets/icons/arrow_left.png');
-    default:
-      return require('@assets/icons/arrow_left.png');
-  }
-}
-
-export default function Icon({name = 'arrow-back', size = 24, dark}) {
-  return (
-    <Image
-      source={getSource(name)}
-      resizeMode="contain"
-      style={{width: size, height: size}}
-    />
-  );
+export default function Icon({size = 24}) {
+  return <ArrowLeft width={size} height={size} />;
 }
