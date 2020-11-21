@@ -14,6 +14,10 @@ export default function Navigation() {
         name="ForgotPassword"
         component={Authentication.ForgotPassword}
       />
+      <Stack.Screen
+        name="ResetPassword"
+        component={Authentication.ResetPassword}
+      />
     </Stack.Navigator>
   );
 }

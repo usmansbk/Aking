@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {Text, Container, Header, Button, TextInput} from '@components/common';
 import {useTheme} from '@config/theme';
 
-export default function SignIn({navigation}) {
+export default function ForgotPassword({navigation}) {
   const theme = useTheme();
   return (
     <>
@@ -20,7 +20,11 @@ export default function SignIn({navigation}) {
           }}>
           <TextInput label="Username" placeholder="Enter your username" />
         </View>
-        <Button color="primary">Send Request</Button>
+        <Button
+          color="primary"
+          onPress={() => navigation.navigate('ResetPassword')}>
+          Send Request
+        </Button>
       </Container>
     </>
   );
