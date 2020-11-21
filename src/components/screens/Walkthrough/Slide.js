@@ -8,11 +8,17 @@ const styles = StyleSheet.create({
     flex: 1,
     width,
   },
-  body: {},
-  footer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
+  body: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    width: height * 0.3,
+    height: height * 0.3,
+  },
+  footerImage: {
+    width: width,
   },
 });
 
@@ -20,13 +26,11 @@ export default function Slide({title, subtitle, image, footer}) {
   return (
     <View style={styles.container}>
       <View style={styles.body}>
-        <Image source={image} />
+        <Image resizeMode="contain" source={image} style={styles.image} />
         <Text variant="title">{title}</Text>
         <Text variant="subtitle">{subtitle}</Text>
       </View>
-      <View style={styles.footer}>
-        <Image source={footer} />
-      </View>
+      <Image source={footer} style={styles.footerImage} />
     </View>
   );
 }

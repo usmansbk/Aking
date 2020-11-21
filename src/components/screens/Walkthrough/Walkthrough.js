@@ -1,23 +1,31 @@
 import React from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, StatusBar, Dimensions} from 'react-native';
 import Slide from './Slide';
 import slides from './slides';
 
+const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
 });
 
 export default function Walkthrough() {
   return (
-    <ScrollView
-      horizontal
-      style={styles.container}
-      showsHorizontalScrollIndicator={false}>
-      {slides.map((slide) => {
-        return <Slide key={slide.id} {...slide} />;
-      })}
-    </ScrollView>
+    <>
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
+      <ScrollView
+        horizontal
+        snapToInterval={width}
+        decelerationRate="fast"
+        style={styles.container}
+        bounces={false}
+        showsHorizontalScrollIndicator={false}>
+        {slides.map((slide) => {
+          return <Slide key={slide.id} {...slide} />;
+        })}
+      </ScrollView>
+    </>
   );
 }

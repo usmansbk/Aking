@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Demi',
     fontSize: 24,
     letterSpacing: 0,
+    marginBottom: 10,
   },
   subtitle: {
     fontFamily: 'Medium',
