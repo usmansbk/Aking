@@ -53,7 +53,7 @@ export const theme = {
     m: 8,
     l: 16,
     xl: 32,
-    space: (size) => size * 2,
+    space: (size) => size * 8,
   },
   shape: {
     radius: 4,

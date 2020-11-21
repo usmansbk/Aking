@@ -22,7 +22,7 @@ export default function SignIn() {
         </Text>
         <View
           style={{
-            paddingVertical: theme.spacing.space(24),
+            paddingVertical: theme.spacing.space(6),
           }}>
           <TextInput
             label="Username"
@@ -30,7 +30,7 @@ export default function SignIn() {
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
             style={{
-              marginBottom: theme.spacing.space(24),
+              marginBottom: theme.spacing.space(6),
             }}
           />
           <TextInput
