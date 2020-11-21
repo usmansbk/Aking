@@ -18,37 +18,36 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function AkingTextInput({
-  label,
-  placeholder,
-  style,
-  secureTextEntry,
-  ...textInputProps
-}) {
-  const theme = useTheme();
-  return (
-    <View
-      style={[
-        styles.container,
-        {
-          borderBottomColor: theme.palatte.textInput.underlineColor,
-        },
-        style,
-      ]}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput
-        placeholder={placeholder}
-        secureTextEntry={secureTextEntry}
-        underlineColorAndroid="transparent"
-        placeholderTextColor={theme.palatte.textInput.placeholderColor}
+const AkingTextInput = React.forwardRef(
+  ({label, placeholder, style, secureTextEntry, ...textInputProps}, ref) => {
+    const theme = useTheme();
+    return (
+      <View
         style={[
-          styles.textInput,
+          styles.container,
           {
-            color: theme.palatte.text.main,
+            borderBottomColor: theme.palatte.textInput.underlineColor,
           },
-        ]}
-        {...textInputProps}
-      />
-    </View>
-  );
-}
+          style,
+        ]}>
+        <Text style={styles.label}>{label}</Text>
+        <TextInput
+          ref={ref}
+          placeholder={placeholder}
+          secureTextEntry={secureTextEntry}
+          underlineColorAndroid="transparent"
+          placeholderTextColor={theme.palatte.textInput.placeholderColor}
+          style={[
+            styles.textInput,
+            {
+              color: theme.palatte.text.main,
+            },
+          ]}
+          {...textInputProps}
+        />
+      </View>
+    );
+  },
+);
+
+export default AkingTextInput;
