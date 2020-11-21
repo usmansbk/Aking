@@ -18,6 +18,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B8F0C18607DF42EE8D6FC0B6 /* Demi.otf in Resources */ = {isa = PBXBuildFile; fileRef = 694FA4D38A264F90994BEBE7 /* Demi.otf */; };
 		D572ABA18698415AB0C1FAC4 /* Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E0C9F4E7FD8944E798AA5A09 /* Regular.otf */; };
+		64897CC91E7047839306417B /* Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 45471A0A216F4F26A095B807 /* Medium.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		694FA4D38A264F90994BEBE7 /* Demi.otf */ = {isa = PBXFileReference; name = "Demi.otf"; path = "../assets/fonts/Demi.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E0C9F4E7FD8944E798AA5A09 /* Regular.otf */ = {isa = PBXFileReference; name = "Regular.otf"; path = "../assets/fonts/Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		45471A0A216F4F26A095B807 /* Medium.otf */ = {isa = PBXFileReference; name = "Medium.otf"; path = "../assets/fonts/Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			children = (
 				694FA4D38A264F90994BEBE7 /* Demi.otf */,
 				E0C9F4E7FD8944E798AA5A09 /* Regular.otf */,
+				45471A0A216F4F26A095B807 /* Medium.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				B8F0C18607DF42EE8D6FC0B6 /* Demi.otf in Resources */,
 				D572ABA18698415AB0C1FAC4 /* Regular.otf in Resources */,
+				64897CC91E7047839306417B /* Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
