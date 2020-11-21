@@ -3,6 +3,7 @@ import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import {Text} from '@components/common';
 
 const {width, height} = Dimensions.get('window');
+const IMAGE_SIZE = height * 0.3;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -14,11 +15,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width: height * 0.3,
-    height: height * 0.3,
-  },
-  footerImage: {
-    width: width,
+    width: IMAGE_SIZE,
+    height: IMAGE_SIZE,
   },
 });
 
@@ -30,7 +28,6 @@ export default function Slide({title, subtitle, image, footer}) {
         <Text variant="title">{title}</Text>
         <Text variant="subtitle">{subtitle}</Text>
       </View>
-      <Image source={footer} style={styles.footerImage} />
     </View>
   );
 }

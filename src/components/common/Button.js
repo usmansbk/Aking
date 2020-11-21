@@ -24,6 +24,7 @@ export default function AkingButton({
   onPress,
   variant = 'contained',
   color = 'accent',
+  textColor,
 }) {
   const theme = useTheme();
   const colors = theme.palatte[color];
@@ -35,6 +36,7 @@ export default function AkingButton({
         styles.container,
         {
           margin: theme.spacing.xs,
+          marginVertical: theme.spacing.m,
           elevation: theme.shape.elevation,
           backgroundColor: colors.main,
           borderRadius: theme.shape.radius,
@@ -42,7 +44,10 @@ export default function AkingButton({
         styles[variant],
       ]}>
       <View style={styles.button}>
-        <Text variant="button" style={{color: colors.contrast}}>
+        <Text
+          variant="button"
+          color={textColor}
+          style={{color: textColor || colors.contrast}}>
           {children}
         </Text>
       </View>
