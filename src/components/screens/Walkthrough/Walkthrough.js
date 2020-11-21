@@ -64,7 +64,10 @@ export default function Walkthrough() {
           return <Slide key={index} {...slide} />;
         })}
       </Animated.ScrollView>
-      <Pagination scrollX={scrollX} />
+      <Pagination
+        currentIndex={Animated.divide(scrollX, width)}
+        scrollX={scrollX}
+      />
       <View style={styles.footer}>
         {slides.map((slide, index) => (
           <Animated.Image
