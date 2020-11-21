@@ -68,12 +68,8 @@ export default function Walkthrough() {
               styles.footerImage,
               {
                 opacity: scrollX.interpolate({
-                  inputRange: [
-                    (index - 1) * width,
-                    index * width,
-                    (index + 1) * width,
-                  ],
-                  outputRange: [0, 1, 0],
+                  inputRange: [(index - 1) * width, index * width],
+                  outputRange: [0, 1],
                   extrapolate: 'clamp',
                 }),
               },
