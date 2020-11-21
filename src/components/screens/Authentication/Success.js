@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
-import {Text} from '@components/common';
+import {Text, Button} from '@components/common';
 import {useTheme} from '@config/theme';
 
 const {width} = Dimensions.get('window');
@@ -9,6 +9,9 @@ const IMAGE_SIZE = width * 0.5;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  content: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -22,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Success() {
+export default function Success({navigation}) {
   const theme = useTheme();
 
   return (
@@ -34,21 +37,26 @@ export default function Success() {
           padding: theme.spacing.xl,
         },
       ]}>
-      <Image
-        source={require('@assets/images/confirmed.png')}
-        resizeMode="contain"
-        style={[
-          styles.image,
-          {
-            marginBottom: theme.spacing.xl,
-          },
-        ]}
-      />
-      <Text variant="headline">Successful!</Text>
-      <Text variant="subheading" style={styles.message}>
-        You have successfully changed password. Please use your new passwords
-        when logging in.
-      </Text>
+      <View style={styles.content}>
+        <Image
+          source={require('@assets/images/confirmed.png')}
+          resizeMode="contain"
+          style={[
+            styles.image,
+            {
+              marginBottom: theme.spacing.xl,
+            },
+          ]}
+        />
+        <Text variant="headline">Successful!</Text>
+        <Text variant="subheading" style={styles.message}>
+          You have successfully changed password. Please use your new passwords
+          when logging in.
+        </Text>
+      </View>
+      <Button color="primary" onPress={() => navigation.navigate('SignIn')}>
+        Log In
+      </Button>
     </View>
   );
 }
