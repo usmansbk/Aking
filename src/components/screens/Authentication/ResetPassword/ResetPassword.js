@@ -50,7 +50,9 @@ export default function ResetPassword({navigation}) {
             secureTextEntry
           />
         </View>
-        <Button color="primary">Change password</Button>
+        <Button color="primary" onPress={() => navigation.navigate('Success')}>
+          Change password
+        </Button>
       </Container>
     </>
   );
