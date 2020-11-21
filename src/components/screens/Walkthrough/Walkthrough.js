@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Walkthrough() {
+export default function Walkthrough({navigation}) {
   const theme = useTheme();
   const scrollX = useRef(new Animated.Value(0)).current;
 
@@ -98,8 +98,15 @@ export default function Walkthrough() {
               padding: theme.spacing.xl,
             },
           ]}>
-          <Button variant="primary">Get Started</Button>
-          <Button variant="text" textColor="white">
+          <Button
+            variant="primary"
+            onPress={() => navigation.navigate('SignIn')}>
+            Get Started
+          </Button>
+          <Button
+            variant="text"
+            textColor="white"
+            onPress={() => navigation.navigate('SignIn')}>
             Log In
           </Button>
         </View>
