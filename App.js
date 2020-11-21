@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import ThemeProvider, {theme} from '@config/theme';
-import {Walkthrough} from '@components/screens';
+import Screens from '@components/screens';
 
 export default function App() {
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function App() {
 
   return (
     <ThemeProvider value={theme}>
-      <Walkthrough />
+      <Screens />
     </ThemeProvider>
   );
 }
