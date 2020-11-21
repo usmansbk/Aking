@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import {StyleSheet} from 'react-native';
 
 const colors = {
   white: '#fff',
@@ -11,8 +12,20 @@ const colors = {
   yellow: '#F4CA8F',
 };
 
+const fonts = StyleSheet.create({
+  title: {
+    fontFamily: 'Demi',
+    fontSize: 24,
+    letterSpacing: 0,
+  },
+  body: {
+    fontFamily: 'Regular',
+    fontSize: 20,
+  },
+});
+
 export const theme = {
-  colors,
+  colors: colors,
   palatte: {
     primary: {
       main: colors.red,
@@ -22,16 +35,11 @@ export const theme = {
       dark: colors.darkBlue,
     },
     text: {
-      black: colors.black,
+      main: colors.black,
       contrast: colors.white,
     },
   },
-  fonts: {
-    regular: {
-      fontFamily: 'Regular',
-      fontSize: 20,
-    },
-  },
+  fonts: fonts,
   spacing: {
     xs: 2,
     s: 4,

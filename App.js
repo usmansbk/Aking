@@ -13,7 +13,7 @@ export default function App() {
 
   return (
     <ThemeProvider value={theme}>
-      <Text>Hello</Text>
+      <Text variant="title">Welcome to aking</Text>
     </ThemeProvider>
   );
 }
