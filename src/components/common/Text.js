@@ -13,6 +13,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Medium',
     fontSize: 18,
   },
+  headline: {
+    fontFamily: 'Demi',
+    fontSize: 32,
+    lineHeight: 41,
+  },
+  subheading: {
+    fontFamily: 'Medium',
+    fontSize: 16,
+    lineHeight: 41,
+  },
   button: {
     fontFamily: 'Demi',
     fontSize: 18,

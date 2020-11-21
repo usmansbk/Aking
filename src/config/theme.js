@@ -10,7 +10,7 @@ const colors = {
   green: '#5ABB56',
   pink: '#E42B6A',
   yellow: '#F4CA8F',
-  gray: '#979797',
+  gray: '#9B9B9B',
 };
 
 export const theme = {
@@ -38,6 +38,7 @@ export const theme = {
       contrast: colors.white,
       primary: colors.red,
       secondary: colors.blue,
+      gray: colors.gray,
     },
   },
   spacing: {
