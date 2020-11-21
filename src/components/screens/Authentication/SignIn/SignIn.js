@@ -48,7 +48,9 @@ export default function SignIn({navigation}) {
             </Button>
           </View>
         </View>
-        <Button color="primary">Log In</Button>
+        <Button color="primary" onPress={() => navigation.navigate('Home')}>
+          Log In
+        </Button>
       </Container>
     </>
   );

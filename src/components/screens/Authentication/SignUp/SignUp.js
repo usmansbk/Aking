@@ -49,7 +49,9 @@ export default function SignUp({navigation}) {
             secureTextEntry
           />
         </View>
-        <Button color="primary">Sign Up</Button>
+        <Button color="primary" onPress={() => navigation.navigate('Home')}>
+          Sign Up
+        </Button>
       </Container>
     </>
   );
