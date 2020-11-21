@@ -15,6 +15,9 @@ const colors = {
 export const theme = {
   colors: colors,
   palatte: {
+    background: {
+      main: colors.white,
+    },
     primary: {
       main: colors.red,
       contrast: colors.white,

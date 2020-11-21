@@ -1,12 +1,5 @@
-import React from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  StatusBar,
-  Dimensions,
-  View,
-  Image,
-} from 'react-native';
+import React, {useRef} from 'react';
+import {StyleSheet, StatusBar, Dimensions, View, Animated} from 'react-native';
 import {Button} from '@components/common';
 import {useTheme} from '@config/theme';
 import Slide from './Slide';
@@ -31,37 +24,67 @@ const styles = StyleSheet.create({
 
 export default function Walkthrough() {
   const theme = useTheme();
+  const scrollX = useRef(new Animated.Value(0)).current;
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: theme.palatte.background.main,
+        },
+      ]}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
-      <ScrollView
+      <Animated.ScrollView
         horizontal
         snapToInterval={width}
         decelerationRate="fast"
         style={styles.slider}
         bounces={false}
+        onScroll={Animated.event(
+          [
+            {
+              nativeEvent: {
+                contentOffset: {
+                  x: scrollX,
+                },
+              },
+            },
+          ],
+          {useNativeDriver: true},
+        )}
         showsHorizontalScrollIndicator={false}>
-        {slides.map((slide) => {
-          return <Slide key={slide.id} {...slide} />;
+        {slides.map((slide, index) => {
+          return <Slide key={index} {...slide} />;
         })}
-      </ScrollView>
+      </Animated.ScrollView>
       <View style={styles.footer}>
-        {slides.map((slide) => (
-          <Image
+        {slides.map((slide, index) => (
+          <Animated.Image
+            key={index}
             resizeMode="contain"
             source={slide.footer}
-            style={styles.footerImage}
+            style={[
+              styles.footerImage,
+              {
+                opacity: scrollX.interpolate({
+                  inputRange: [
+                    (index - 1) * width,
+                    index * width,
+                    (index + 1) * width,
+                  ],
+                  outputRange: [0, 1, 0],
+                  extrapolate: 'clamp',
+                }),
+              },
+            ]}
           />
         ))}
         <View
-          style={[
-            styles.buttons,
-            {
-              padding: theme.spacing.xl,
-              marginVertical: theme.spacing.xl,
-            },
-          ]}>
+          style={{
+            padding: theme.spacing.xl,
+            marginVertical: theme.spacing.xl,
+          }}>
           <Button variant="primary">Get Started</Button>
           <Button variant="text" textColor="white">
             Log In
