@@ -9,12 +9,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function SignIn() {
+export default function SignIn({navigation}) {
   const theme = useTheme();
   const passwordRef = useRef(null);
   return (
     <>
-      <Header />
+      <Header onPressLeftIcon={() => navigation.goBack()} />
       <Container>
         <Text variant="headline">Welcome back</Text>
         <Text variant="subheading" color="gray">

@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Header({title, leftIcon}) {
+export default function Header({title, leftIcon, onPressLeftIcon}) {
   const theme = useTheme();
   return (
     <>
@@ -28,7 +28,7 @@ export default function Header({title, leftIcon}) {
             height: theme.spacing.l * 4,
           },
         ]}>
-        <IconButton name={leftIcon} />
+        <IconButton name={leftIcon} onPress={onPressLeftIcon} />
         <Text>{title}</Text>
       </View>
     </>
