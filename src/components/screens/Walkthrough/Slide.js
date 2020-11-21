@@ -3,7 +3,7 @@ import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import {Text} from '@components/common';
 
 const {width, height} = Dimensions.get('window');
-const IMAGE_SIZE = height * 0.3;
+const IMAGE_SIZE = height * 0.4;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
