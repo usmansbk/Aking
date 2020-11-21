@@ -100,7 +100,7 @@ export default function Walkthrough({navigation}) {
           ]}>
           <Button
             variant="primary"
-            onPress={() => navigation.navigate('SignIn')}>
+            onPress={() => navigation.navigate('SignUp')}>
             Get Started
           </Button>
           <Button
