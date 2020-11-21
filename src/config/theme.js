@@ -11,6 +11,8 @@ const colors = {
   pink: '#E42B6A',
   yellow: '#F4CA8F',
   gray: '#9B9B9B',
+  gray2: '#D8D8D8',
+  gray3: '#C6C6C6',
 };
 
 export const theme = {
@@ -40,6 +42,10 @@ export const theme = {
       secondary: colors.blue,
       gray: colors.gray,
     },
+    textInput: {
+      underlineColor: colors.gray2,
+      placeholderColor: colors.gray3,
+    },
   },
   spacing: {
     xs: 2,
@@ -47,6 +53,7 @@ export const theme = {
     m: 8,
     l: 16,
     xl: 32,
+    space: (size) => size * 2,
   },
   shape: {
     radius: 4,

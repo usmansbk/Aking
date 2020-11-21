@@ -17,6 +17,12 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     backgroundColor: 'transparent',
   },
+  fullWidth: {
+    alignSelf: 'auto',
+  },
+  small: {
+    alignSelf: 'center',
+  },
 });
 
 export default function AkingButton({
@@ -25,6 +31,7 @@ export default function AkingButton({
   variant = 'contained',
   color = 'accent',
   textColor,
+  fullWidth = true,
 }) {
   const theme = useTheme();
   const colors = theme.palatte[color];
@@ -42,6 +49,7 @@ export default function AkingButton({
           borderRadius: theme.shape.radius,
         },
         styles[variant],
+        fullWidth ? styles.fullWidth : styles.small,
       ]}>
       <View style={styles.button}>
         <Text

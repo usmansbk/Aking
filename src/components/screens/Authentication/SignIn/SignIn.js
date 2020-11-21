@@ -1,7 +1,16 @@
 import React from 'react';
-import {Text, Container, Header, Button} from '@components/common';
+import {View, StyleSheet} from 'react-native';
+import {Text, Container, Header, Button, TextInput} from '@components/common';
+import {useTheme} from '@config/theme';
+
+const styles = StyleSheet.create({
+  forgotPassword: {
+    alignItems: 'flex-end',
+  },
+});
 
 export default function SignIn() {
+  const theme = useTheme();
   return (
     <>
       <Header />
@@ -10,6 +19,27 @@ export default function SignIn() {
         <Text variant="subheading" color="gray">
           Sign in to continue
         </Text>
+        <View
+          style={{
+            paddingVertical: theme.spacing.space(24),
+          }}>
+          <TextInput
+            label="Username"
+            placeholder="Enter your username"
+            returnKeyType="next"
+            style={{
+              marginBottom: theme.spacing.space(24),
+            }}
+          />
+          <TextInput
+            label="Password"
+            placeholder="Enter your password"
+            secureTextEntry
+          />
+          <View style={styles.forgotPassword}>
+            <Button variant="text">Forgot password</Button>
+          </View>
+        </View>
         <Button color="primary">Log In</Button>
       </Container>
     </>
