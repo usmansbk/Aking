@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import {StyleSheet} from 'react-native';
 
 const colors = {
   white: '#fff',
@@ -11,18 +10,6 @@ const colors = {
   pink: '#E42B6A',
   yellow: '#F4CA8F',
 };
-
-const fonts = StyleSheet.create({
-  title: {
-    fontFamily: 'Demi',
-    fontSize: 24,
-    letterSpacing: 0,
-  },
-  body: {
-    fontFamily: 'Regular',
-    fontSize: 20,
-  },
-});
 
 export const theme = {
   colors: colors,
@@ -39,7 +26,6 @@ export const theme = {
       contrast: colors.white,
     },
   },
-  fonts: fonts,
   spacing: {
     xs: 2,
     s: 4,

@@ -14,6 +14,7 @@ export default function App() {
   return (
     <ThemeProvider value={theme}>
       <Text variant="title">Welcome to aking</Text>
+      <Text variant="subtitle">Whats going to happen tomorrow?</Text>
     </ThemeProvider>
   );
 }
