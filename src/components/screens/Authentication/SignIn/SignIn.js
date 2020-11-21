@@ -1,11 +1,14 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Text, Container} from '@components/common';
+import {Text, Container, Header} from '@components/common';
 
 export default function SignIn() {
   return (
-    <Container>
-      <Text>Welcome back</Text>
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <Text>Welcome back</Text>
+      </Container>
+    </>
   );
 }
