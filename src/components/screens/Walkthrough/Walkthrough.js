@@ -49,6 +49,7 @@ export default function Walkthrough() {
         horizontal
         snapToInterval={width}
         decelerationRate="fast"
+        pagingEnabled
         style={styles.slider}
         bounces={false}
         onScroll={Animated.event(
