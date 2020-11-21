@@ -67,6 +67,7 @@ export default function Walkthrough() {
       <Pagination
         currentIndex={Animated.divide(scrollX, width)}
         scrollX={scrollX}
+        pages={slides.length}
       />
       <View style={styles.footer}>
         {slides.map((slide, index) => (

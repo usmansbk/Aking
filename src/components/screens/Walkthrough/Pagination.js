@@ -38,9 +38,9 @@ function Dot({currentIndex, index}) {
     />
   );
 }
-export default function Pagination({currentIndex}) {
+export default function Pagination({currentIndex, pages = 3}) {
   const theme = useTheme();
-  const dots = new Array(3).fill(0);
+  const dots = new Array(pages).fill(0);
   return (
     <View style={[styles.container, {padding: theme.spacing.s}]}>
       {dots.map((_, index) => (
