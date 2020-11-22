@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
+  tabButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default function AkingTabBar({state, descriptors, navigation}) {
@@ -25,6 +29,7 @@ export default function AkingTabBar({state, descriptors, navigation}) {
         styles.container,
         {
           backgroundColor: theme.palatte.secondary.dark,
+          paddingVertical: theme.spacing.l,
         },
       ]}>
       {state.routes.map((route, index) => {
@@ -68,20 +73,44 @@ export default function AkingTabBar({state, descriptors, navigation}) {
         };
 
         return (
-          <TouchableOpacity
+          <TabButton
             key={index}
+            isFocused={isFocused}
+            iconName={iconName}
+            label={label}
             onPress={onPress}
             onLongPress={onLongPress}
-            accessibilityRole="button"
-            accessibilityState={isFocused ? {selected: true} : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}>
-            <Icon name={iconName} size={24} color={color} />
-            <Text variant="tabLabel" style={{color}}>
-              {label}
-            </Text>
-          </TouchableOpacity>
+            options={options}
+            color={color}
+          />
         );
       })}
     </View>
   );
 }
+
+const TabButton = ({
+  onPress,
+  onLongPress,
+  isFocused,
+  options,
+  iconName,
+  color,
+  label,
+}) => {
+  const theme = useTheme();
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      onLongPress={onLongPress}
+      accessibilityRole="button"
+      accessibilityState={isFocused ? {selected: true} : {}}
+      accessibilityLabel={options.tabBarAccessibilityLabel}
+      style={styles.tabButton}>
+      <Icon name={iconName} size={24} color={color} />
+      <Text variant="tabLabel" style={{color, marginTop: theme.spacing.xs}}>
+        {label}
+      </Text>
+    </TouchableOpacity>
+  );
+};
