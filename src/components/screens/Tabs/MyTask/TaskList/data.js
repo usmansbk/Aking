@@ -11,7 +11,7 @@ const CALENDAR_FORMAT = {
 };
 
 function getTitle(date = moment()) {
-  return moment(date).calendar(null, CALENDAR_FORMAT);
+  return moment(date).calendar(null, CALENDAR_FORMAT).toUpperCase();
 }
 
 export default [

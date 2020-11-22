@@ -39,7 +39,9 @@ export default function Item({title, time}) {
         },
       ]}>
       <View style={styles.body}>
-        <Text style={styles.title}>{title}</Text>
+        <Text numberOfLines={1} style={styles.title}>
+          {title}
+        </Text>
         <Text style={[styles.subtitle, {color: theme.palatte.text.gray}]}>
           {time}
         </Text>

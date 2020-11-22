@@ -1,5 +1,6 @@
-import React from 'react';
-import {SectionList, StyleSheet} from 'react-native';
+import React, {useRef} from 'react';
+import {SectionList, StyleSheet, View} from 'react-native';
+import {useScrollToTop} from '@react-navigation/native';
 import {Text} from '@components/common';
 import {useTheme} from '@config/theme';
 import data from './data';
@@ -9,27 +10,49 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
   },
+  separator: {
+    height: 16,
+  },
 });
 
 export default function TaskList() {
   const theme = useTheme();
+  const scrollRef = useRef(null);
+  useScrollToTop(scrollRef);
+
   return (
     <SectionList
+      ref={scrollRef}
       style={[
         styles.container,
         {
           backgroundColor: theme.palatte.background.list,
-          padding: theme.spacing.l,
         },
       ]}
-      contentContainerStyle={{}}
-      stickySectionHeadersEnabled
+      contentContainerStyle={{
+        padding: theme.spacing.l,
+      }}
+      stickySectionHeadersEnabled={false}
       sections={data}
       keyExtractor={(item) => item.id}
       renderItem={renderItem}
       renderSectionHeader={({section: {title}}) => {
-        <Text variant="title">{title}</Text>;
+        return (
+          <View
+            style={[
+              {
+                backgroundColor: theme.palatte.background.list,
+                paddingVertical: theme.spacing.l,
+              },
+            ]}>
+            <Text variant="sectionHeader" color="sectionHeader">
+              {title}
+            </Text>
+          </View>
+        );
       }}
+      SectionSeparatorComponent={SeparatorComponent}
+      ItemSeparatorComponent={SeparatorComponent}
     />
   );
 }
@@ -37,3 +60,5 @@ export default function TaskList() {
 const renderItem = ({item}) => {
   return <Item {...item} />;
 };
+
+const SeparatorComponent = () => <View style={styles.separator} />;

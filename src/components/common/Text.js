@@ -37,6 +37,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 41,
   },
+  sectionHeader: {
+    fontFamily: 'Demi',
+    fontSize: 14,
+  },
 });
 
 export default function AkingText({
@@ -44,10 +48,13 @@ export default function AkingText({
   variant = 'body',
   color = 'main',
   style = {},
+  numberOfLines,
 }) {
   const theme = useTheme();
   return (
-    <Text style={[styles[variant], {color: theme.palatte.text[color]}, style]}>
+    <Text
+      numberOfLines={numberOfLines}
+      style={[styles[variant], {color: theme.palatte.text[color]}, style]}>
       {children}
     </Text>
   );

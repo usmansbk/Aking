@@ -15,6 +15,7 @@ const colors = {
   gray3: '#C6C6C6',
   gray4: '#8E8E93',
   gray5: '#F9F9F9',
+  gray6: '#9A9A9A',
   iconBlack: '#1E201D',
 };
 
@@ -45,6 +46,7 @@ export const theme = {
       primary: colors.red,
       secondary: colors.blue,
       gray: colors.gray,
+      sectionHeader: colors.gray6,
     },
     textInput: {
       underlineColor: colors.gray2,
