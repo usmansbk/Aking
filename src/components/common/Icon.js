@@ -48,7 +48,7 @@ export default function Icon({size = 24, color, name}) {
       width={size}
       height={size}
       fill={color || theme.colors.iconBlack}
-      fillSecondary="white"
+      fillSecondary={theme.palatte.background.main}
     />
   );
 }
