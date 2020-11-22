@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {View, StyleSheet, Dimensions, Animated} from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import {useTheme} from '@config/theme';
 import {Text, CheckBox, Icon} from '@components/common';
 
 const {width} = Dimensions.get('window');
 const ITEM_HEIGHT = 70;
+const SHIFT = -(width * 0.4);
 
 const styles = StyleSheet.create({
   container: {
@@ -13,6 +14,8 @@ const styles = StyleSheet.create({
     height: ITEM_HEIGHT,
     alignItems: 'center',
     position: 'relative',
+  },
+  animatedView: {
     zIndex: 1,
   },
   title: {
@@ -53,6 +56,7 @@ const styles = StyleSheet.create({
 
 export default function Item({title, time, completed}) {
   const theme = useTheme();
+  const slideX = useRef(new Animated.Value(0)).current;
   const [checked, setCheck] = useState(completed);
   const [openAction, toggleAction] = useState(false);
   const completedStyle = checked
@@ -64,46 +68,63 @@ export default function Item({title, time, completed}) {
 
   return (
     <View>
-      <RectButton
+      <Animated.View
         style={[
-          styles.container,
+          styles.animatedView,
           {
-            paddingLeft: theme.spacing.m,
-            elevation: theme.shape.elevation,
-            backgroundColor: theme.palatte.background.main,
-            borderRadius: theme.shape.radius,
             transform: [
               {
-                translateX: -(width * (openAction ? 0.4 : 0)),
+                translateX: openAction
+                  ? slideX.interpolate({
+                      inputRange: [0, 100],
+                      outputRange: [SHIFT, 0],
+                      extrapolate: 'clamp',
+                    })
+                  : slideX.interpolate({
+                      inputRange: [0, 100],
+                      outputRange: [0, SHIFT],
+                      extrapolate: 'clamp',
+                    }),
               },
             ],
           },
-        ]}
-        onPress={() => toggleAction(!openAction)}>
-        <CheckBox checked={checked} onPress={setCheck} />
-        <View
+        ]}>
+        <RectButton
           style={[
-            styles.body,
+            styles.container,
             {
               paddingLeft: theme.spacing.m,
+              elevation: theme.shape.elevation,
+              backgroundColor: theme.palatte.background.main,
+              borderRadius: theme.shape.radius,
             },
-          ]}>
-          <Text numberOfLines={1} style={[styles.title, completedStyle]}>
-            {title}
-          </Text>
-          <Text
+          ]}
+          onPress={() => toggleAction(!openAction)}>
+          <CheckBox checked={checked} onPress={setCheck} />
+          <View
             style={[
-              styles.subtitle,
+              styles.body,
               {
-                color: theme.palatte.text.gray,
+                paddingLeft: theme.spacing.m,
               },
-              completedStyle,
             ]}>
-            {time}
-          </Text>
-        </View>
-        <Status completed={checked} />
-      </RectButton>
+            <Text numberOfLines={1} style={[styles.title, completedStyle]}>
+              {title}
+            </Text>
+            <Text
+              style={[
+                styles.subtitle,
+                {
+                  color: theme.palatte.text.gray,
+                },
+                completedStyle,
+              ]}>
+              {time}
+            </Text>
+          </View>
+          <Status completed={checked} />
+        </RectButton>
+      </Animated.View>
       <View style={styles.actionBox}>
         <Action icon="pen" />
         <Action icon="trash" />
