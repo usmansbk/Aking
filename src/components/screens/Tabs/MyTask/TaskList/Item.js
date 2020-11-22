@@ -1,14 +1,18 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import {useTheme} from '@config/theme';
-import {Text, CheckBox} from '@components/common';
+import {Text, CheckBox, Icon} from '@components/common';
+
+const {width} = Dimensions.get('window');
+const ITEM_HEIGHT = 70;
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 70,
+    height: ITEM_HEIGHT,
     alignItems: 'center',
+    position: 'relative',
   },
   title: {
     fontFamily: 'Medium',
@@ -29,11 +33,27 @@ const styles = StyleSheet.create({
   completed: {
     textDecorationLine: 'line-through',
   },
+  actionContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: ITEM_HEIGHT,
+    height: ITEM_HEIGHT,
+  },
+  actionBox: {
+    flexDirection: 'row',
+    position: 'absolute',
+    right: 0,
+  },
+  right: {
+    flex: 1,
+    flexDirection: 'row',
+  },
 });
 
 export default function Item({title, time, completed}) {
   const theme = useTheme();
   const [checked, setCheck] = useState(completed);
+  const [openAction, toggleAction] = useState(false);
   const completedStyle = checked
     ? {
         textDecorationLine: 'line-through',
@@ -42,40 +62,52 @@ export default function Item({title, time, completed}) {
     : {};
 
   return (
-    <RectButton
-      style={[
-        styles.container,
-        {
-          paddingLeft: theme.spacing.m,
-          elevation: theme.shape.elevation,
-          backgroundColor: theme.palatte.background.main,
-          borderRadius: theme.shape.radius,
-        },
-      ]}>
-      <CheckBox checked={checked} onPress={setCheck} />
-      <View
+    <View>
+      <RectButton
         style={[
-          styles.body,
+          styles.container,
           {
             paddingLeft: theme.spacing.m,
+            elevation: theme.shape.elevation,
+            backgroundColor: theme.palatte.background.main,
+            borderRadius: theme.shape.radius,
+            transform: [
+              {
+                translateX: -(width * (openAction ? 0.4 : 0)),
+              },
+            ],
           },
-        ]}>
-        <Text numberOfLines={1} style={[styles.title, completedStyle]}>
-          {title}
-        </Text>
-        <Text
+        ]}
+        onPress={() => toggleAction(!openAction)}>
+        <CheckBox checked={checked} onPress={setCheck} />
+        <View
           style={[
-            styles.subtitle,
+            styles.body,
             {
-              color: theme.palatte.text.gray,
+              paddingLeft: theme.spacing.m,
             },
-            completedStyle,
           ]}>
-          {time}
-        </Text>
+          <Text numberOfLines={1} style={[styles.title, completedStyle]}>
+            {title}
+          </Text>
+          <Text
+            style={[
+              styles.subtitle,
+              {
+                color: theme.palatte.text.gray,
+              },
+              completedStyle,
+            ]}>
+            {time}
+          </Text>
+        </View>
+        <Status completed={checked} />
+      </RectButton>
+      <View style={styles.actionBox}>
+        <Action icon="pen" />
+        <Action icon="trash" />
       </View>
-      <Status completed={checked} />
-    </RectButton>
+    </View>
   );
 }
 
@@ -92,5 +124,22 @@ function Status({completed}) {
         },
       ]}
     />
+  );
+}
+
+function Action({onPress, icon}) {
+  const theme = useTheme();
+  return (
+    <RectButton
+      onPress={onPress}
+      style={[
+        styles.actionContainer,
+        {
+          backgroundColor: theme.palatte.background.main,
+          marginRight: theme.spacing.xs,
+        },
+      ]}>
+      <Icon name={icon} color={theme.palatte.primary.main} />
+    </RectButton>
   );
 }
