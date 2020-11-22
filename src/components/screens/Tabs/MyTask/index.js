@@ -28,13 +28,14 @@ export default function MyTask() {
           },
           style: {
             backgroundColor: theme.palatte.primary.main,
+            elevation: 0,
           },
           indicatorStyle: {
             backgroundColor: theme.palatte.primary.contrast,
             paddingHorizontal: theme.spacing.xl,
             height: 3,
-            justifyContent: 'center',
-            alignItems: 'center',
+            width: 100,
+            left: 50,
           },
           activeTintColor: theme.palatte.primary.contrast,
         }}>
