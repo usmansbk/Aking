@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     height: ITEM_HEIGHT,
     alignItems: 'center',
     position: 'relative',
+    zIndex: 1,
   },
   title: {
     fontFamily: 'Medium',
