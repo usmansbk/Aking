@@ -6,5 +6,16 @@ import Icon from './Icon';
 import IconButton from './IconButton';
 import TextInput from './TextInput';
 import FAB from './FAB';
+import StatusBar from './StatusBar';
 
-export {Text, Button, Container, Header, Icon, IconButton, FAB, TextInput};
+export {
+  Text,
+  Button,
+  Container,
+  Header,
+  Icon,
+  IconButton,
+  StatusBar,
+  FAB,
+  TextInput,
+};
