@@ -4,14 +4,19 @@ import {TouchableOpacity, View, StyleSheet} from 'react-native';
 import {Text, Icon} from '@components/common';
 import {useTheme} from '@config/theme';
 
+const BUTTON_SIZE = 48;
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
   },
   tabButton: {
     justifyContent: 'center',
     alignItems: 'center',
+    width: BUTTON_SIZE,
+    height: BUTTON_SIZE,
+    borderRadius: BUTTON_SIZE / 2,
   },
 });
 
@@ -29,7 +34,7 @@ export default function AkingTabBar({state, descriptors, navigation}) {
         styles.container,
         {
           backgroundColor: theme.palatte.secondary.dark,
-          paddingVertical: theme.spacing.l,
+          paddingVertical: theme.spacing.s,
         },
       ]}>
       {state.routes.map((route, index) => {
@@ -106,8 +111,13 @@ const TabButton = ({
       accessibilityRole="button"
       accessibilityState={isFocused ? {selected: true} : {}}
       accessibilityLabel={options.tabBarAccessibilityLabel}
-      style={styles.tabButton}>
-      <Icon name={iconName} size={24} color={color} />
+      style={[
+        styles.tabButton,
+        {
+          margin: theme.spacing.l,
+        },
+      ]}>
+      <Icon name={iconName} size={BUTTON_SIZE / 2} color={color} />
       <Text variant="tabLabel" style={{color, marginTop: theme.spacing.xs}}>
         {label}
       </Text>
