@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import {useTheme} from '@config/theme';
-import {Text} from '@components/common';
+import {Text, CheckBox} from '@components/common';
 
 const styles = StyleSheet.create({
   container: {
@@ -51,7 +51,14 @@ export default function Item({title, time, completed}) {
           borderRadius: theme.shape.radius,
         },
       ]}>
-      <View style={styles.body}>
+      <CheckBox checked={completed} onPress={() => null} />
+      <View
+        style={[
+          styles.body,
+          {
+            paddingLeft: theme.spacing.m,
+          },
+        ]}>
         <Text numberOfLines={1} style={[styles.title, completedStyle]}>
           {title}
         </Text>

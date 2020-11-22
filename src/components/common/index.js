@@ -7,6 +7,7 @@ import IconButton from './IconButton';
 import TextInput from './TextInput';
 import FAB from './FAB';
 import StatusBar from './StatusBar';
+import CheckBox from './CheckBox';
 
 export {
   Text,
@@ -18,4 +19,5 @@ export {
   StatusBar,
   FAB,
   TextInput,
+  CheckBox,
 };

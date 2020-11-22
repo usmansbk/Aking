@@ -5,6 +5,8 @@ import List from '@assets/svgs/List.svg';
 import Menu from '@assets/svgs/Menu.svg';
 import Person from '@assets/svgs/Person.svg';
 import Options from '@assets/svgs/Options.svg';
+import Checked from '@assets/svgs/Checked.svg';
+import Unchecked from '@assets/svgs/Unchecked.svg';
 import {useTheme} from '@config/theme';
 
 export default function Icon({size = 24, color, name}) {
@@ -30,6 +32,12 @@ export default function Icon({size = 24, color, name}) {
       break;
     case 'options':
       Component = Options;
+      break;
+    case 'checked':
+      Component = Checked;
+      break;
+    case 'unchecked':
+      Component = Unchecked;
       break;
     default:
       Component = ArrowLeft;
