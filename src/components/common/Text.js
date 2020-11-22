@@ -27,6 +27,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Demi',
     fontSize: 18,
   },
+  tabLabel: {
+    fontFamily: 'Demi',
+    fontSize: 12,
+    letterSpacing: 0.14,
+  },
 });
 
 export default function AkingText({

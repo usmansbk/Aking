@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Icon} from '@components/common';
+import {Icon, Text} from '@components/common';
 import {useTheme} from '@config/theme';
 import MyTask from './MyTask';
 import Menu from './Menu';
@@ -16,22 +16,30 @@ export default function Tabs() {
     <Tab.Navigator
       initialRouteName="MyTask"
       backBehavior="initialRoute"
-      screenOptions={({route}) => ({
-        tabBarIcon: ({color, size}) => {
-          const name = route.name;
-          let iconName;
-          if (name === 'MyTask') {
-            iconName = 'check';
-          } else if (name === 'Menu') {
-            iconName = 'menu';
-          } else if (name === 'Quick') {
-            iconName = 'list';
-          } else {
-            iconName = 'person';
-          }
-          return <Icon name={iconName} color={color} size={size} />;
-        },
-      })}
+      screenOptions={({route: {name}}) => {
+        let iconName;
+        let label = name;
+        if (name === 'MyTask') {
+          iconName = 'check';
+          label = 'My Task';
+        } else if (name === 'Menu') {
+          iconName = 'menu';
+        } else if (name === 'Quick') {
+          iconName = 'list';
+        } else {
+          iconName = 'person';
+        }
+        return {
+          tabBarIcon: ({color, size}) => {
+            return <Icon name={iconName} color={color} size={size} />;
+          },
+          tabBarLabel: ({color}) => (
+            <Text variant="tabLabel" style={{color}}>
+              {label}
+            </Text>
+          ),
+        };
+      }}
       tabBarOptions={{
         activeTintColor: theme.palatte.tabBar.activeTintColor,
         inactiveTintColor: theme.palatte.tabBar.inactiveTintColor,
