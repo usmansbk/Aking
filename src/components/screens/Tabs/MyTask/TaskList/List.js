@@ -42,7 +42,7 @@ export default function TaskList() {
             style={[
               {
                 backgroundColor: theme.palatte.background.list,
-                paddingVertical: theme.spacing.l,
+                paddingVertical: theme.spacing.s,
               },
             ]}>
             <Text variant="sectionHeader" color="sectionHeader">

@@ -16,6 +16,7 @@ const colors = {
   gray4: '#8E8E93',
   gray5: '#F9F9F9',
   gray6: '#9A9A9A',
+  gray7: '#9E9E9E',
   iconBlack: '#1E201D',
 };
 
@@ -47,6 +48,7 @@ export const theme = {
       secondary: colors.blue,
       gray: colors.gray,
       sectionHeader: colors.gray6,
+      lineThrough: colors.gray7,
     },
     textInput: {
       underlineColor: colors.gray2,

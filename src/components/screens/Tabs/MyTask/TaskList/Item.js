@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     height: 70,
+    alignItems: 'center',
   },
   title: {
     fontFamily: 'Medium',
@@ -22,30 +23,66 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  status: {
+    height: '30%',
+  },
+  completed: {
+    textDecorationLine: 'line-through',
+  },
 });
 
-export default function Item({title, time}) {
+export default function Item({title, time, completed}) {
   const theme = useTheme();
+  const completedStyle = completed
+    ? {
+        textDecorationLine: 'line-through',
+        color: theme.palatte.text.lineThrough,
+      }
+    : {};
 
   return (
     <RectButton
       style={[
         styles.container,
         {
-          paddingHorizontal: theme.spacing.m,
+          paddingLeft: theme.spacing.m,
           elevation: theme.shape.elevation,
           backgroundColor: theme.palatte.background.main,
           borderRadius: theme.shape.radius,
         },
       ]}>
       <View style={styles.body}>
-        <Text numberOfLines={1} style={styles.title}>
+        <Text numberOfLines={1} style={[styles.title, completedStyle]}>
           {title}
         </Text>
-        <Text style={[styles.subtitle, {color: theme.palatte.text.gray}]}>
+        <Text
+          style={[
+            styles.subtitle,
+            {
+              color: theme.palatte.text.gray,
+            },
+            completedStyle,
+          ]}>
           {time}
         </Text>
       </View>
+      <Status completed={completed} />
     </RectButton>
+  );
+}
+
+function Status({completed}) {
+  const theme = useTheme();
+
+  return (
+    <View
+      style={[
+        styles.status,
+        {
+          width: theme.spacing.s,
+          backgroundColor: completed ? theme.colors.red : theme.colors.blue,
+        },
+      ]}
+    />
   );
 }
