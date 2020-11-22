@@ -35,6 +35,7 @@ export default function TaskList() {
       stickySectionHeadersEnabled={false}
       sections={data}
       keyExtractor={(item) => item.id}
+      initialNumToRender={1}
       renderItem={renderItem}
       renderSectionHeader={({section: {title}}) => {
         return (
