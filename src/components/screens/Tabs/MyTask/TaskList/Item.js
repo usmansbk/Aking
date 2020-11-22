@@ -3,6 +3,7 @@ import {View, StyleSheet, Dimensions, Animated} from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import {useTheme} from '@config/theme';
 import {Text, CheckBox, Icon} from '@components/common';
+import moment from 'moment';
 
 const {width} = Dimensions.get('window');
 const ITEM_HEIGHT = 70;
@@ -119,7 +120,7 @@ export default function Item({title, time, completed}) {
                 },
                 completedStyle,
               ]}>
-              {time}
+              {moment(time).format('hh:mm a')}
             </Text>
           </View>
           <Status completed={checked} />
