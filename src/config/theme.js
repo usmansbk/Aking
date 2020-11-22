@@ -14,6 +14,7 @@ const colors = {
   gray2: '#D8D8D8',
   gray3: '#C6C6C6',
   gray4: '#8E8E93',
+  gray5: '#F9F9F9',
   iconBlack: '#1E201D',
 };
 
@@ -22,6 +23,7 @@ export const theme = {
   palatte: {
     background: {
       main: colors.white,
+      list: colors.gray5,
     },
     primary: {
       main: colors.red,

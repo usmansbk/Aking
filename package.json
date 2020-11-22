@@ -16,6 +16,7 @@
     "@react-navigation/material-top-tabs": "^5.3.10",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
+    "moment": "^2.29.1",
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-gesture-handler": "^1.8.0",
@@ -25,7 +26,8 @@
     "react-native-screens": "^2.15.0",
     "react-native-splash-screen": "^3.2.0",
     "react-native-svg": "^12.1.0",
-    "react-native-tab-view": "^2.15.2"
+    "react-native-tab-view": "^2.15.2",
+    "shortid": "^2.2.16"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
