@@ -13,7 +13,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function AkingFAB({size = SIZE, onPress, color = 'primary'}) {
+export default function AkingFAB({
+  size = SIZE,
+  onPress,
+  color = 'primary',
+  style = {},
+}) {
   const theme = useTheme();
   const colors = theme.palatte[color];
   return (
@@ -27,6 +32,7 @@ export default function AkingFAB({size = SIZE, onPress, color = 'primary'}) {
           borderRadius: size / 2,
           backgroundColor: colors.main,
         },
+        style,
       ]}>
       <Text style={{fontSize: size / 2, color: colors.contrast}}>+</Text>
     </RectButton>

@@ -16,6 +16,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  fabContainer: {
+    width: 56,
+    alignItems: 'center',
+  },
+  fab: {
+    position: 'absolute',
+  },
 });
 
 export default function AkingTabBar({state, descriptors, navigation}) {
@@ -56,7 +63,9 @@ export default function AkingTabBar({state, descriptors, navigation}) {
         isFocused={state.index === 1}
         descriptors={descriptors}
       />
-      <FAB />
+      <View style={styles.fabContainer}>
+        <FAB style={[styles.fab, {marginTop: theme.spacing.space(-2)}]} />
+      </View>
       <TabButton
         navigation={navigation}
         route={routes[2]}
