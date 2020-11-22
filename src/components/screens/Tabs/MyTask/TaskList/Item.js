@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import {useTheme} from '@config/theme';
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
 
 export default function Item({title, time, completed}) {
   const theme = useTheme();
-  const completedStyle = completed
+  const [checked, setCheck] = useState(completed);
+  const completedStyle = checked
     ? {
         textDecorationLine: 'line-through',
         color: theme.palatte.text.lineThrough,
@@ -51,7 +52,7 @@ export default function Item({title, time, completed}) {
           borderRadius: theme.shape.radius,
         },
       ]}>
-      <CheckBox checked={completed} onPress={() => null} />
+      <CheckBox checked={checked} onPress={setCheck} />
       <View
         style={[
           styles.body,
@@ -73,7 +74,7 @@ export default function Item({title, time, completed}) {
           {time}
         </Text>
       </View>
-      <Status completed={completed} />
+      <Status completed={checked} />
     </RectButton>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import {useTheme} from '@config/theme';
@@ -17,8 +17,12 @@ const styles = StyleSheet.create({
 
 export default function CheckBox({checked, onPress}) {
   const theme = useTheme();
+  const onValueChange = useCallback(() => onPress(!checked), [
+    checked,
+    onPress,
+  ]);
   return (
-    <RectButton onPress={onPress}>
+    <RectButton onPress={onValueChange}>
       <View style={styles.container}>
         <Icon
           color={theme.palatte.text.contrast}
