@@ -1,7 +1,7 @@
 // https://reactnavigation.org/docs/bottom-tab-navigator/
 import React, {useEffect} from 'react';
 import {TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
-import {changeNavigationBarColor} from 'react-native-navigation-bar-color';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import {Text, Icon, FAB} from '@components/common';
 import {useTheme} from '@config/theme';
 
@@ -24,7 +24,7 @@ export default function AkingTabBar({state, descriptors, navigation}) {
 
   useEffect(() => {
     try {
-      changeNavigationBarColor(theme.palatte.secondary.dark, true);
+      changeNavigationBarColor(theme.palatte.secondary.dark, false);
     } catch (e) {
       console.log(e);
     }
