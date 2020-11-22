@@ -70,13 +70,21 @@ export default function Item({title, time, completed}) {
   const pan = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => {
+        slideX.setOffset(slideX._value);
+      },
       onPanResponderMove: Animated.event([null, {dx: slideX}], {
         useNativeDriver: false,
       }),
-      onPanResponderRelease: (e, gestureState) => {
-        if (SHIFT < gestureState.dx) {
-          slideX.setValue(0);
+      onPanResponderRelease: (_, gestureState) => {
+        const {dx} = gestureState;
+        if (SHIFT < dx) {
+          Animated.timing(slideX, {
+            toValue: 0,
+            useNativeDriver: false,
+          }).start();
         }
+        slideX.flattenOffset();
       },
     }),
   ).current;
@@ -116,7 +124,7 @@ export default function Item({title, time, completed}) {
               borderRadius: theme.shape.radius,
             },
           ]}
-          onPress={() => null}>
+          onPress={() => console.log('open item')}>
           <CheckBox checked={checked} onPress={setCheck} />
           <View
             style={[
