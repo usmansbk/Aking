@@ -14,9 +14,6 @@ const styles = StyleSheet.create({
   tabButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: BUTTON_SIZE,
-    height: BUTTON_SIZE,
-    borderRadius: BUTTON_SIZE / 2,
   },
 });
 
@@ -27,6 +24,7 @@ export default function AkingTabBar({state, descriptors, navigation}) {
   if (focusedOptions.tabBarVisible === false) {
     return null;
   }
+  const routes = state.routes;
 
   return (
     <View
@@ -34,10 +32,10 @@ export default function AkingTabBar({state, descriptors, navigation}) {
         styles.container,
         {
           backgroundColor: theme.palatte.secondary.dark,
-          paddingVertical: theme.spacing.s,
+          paddingVertical: theme.spacing.xs,
         },
       ]}>
-      {state.routes.map((route, index) => {
+      {routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const {name} = route;
         let iconName;
@@ -116,6 +114,7 @@ const TabButton = ({
           styles.tabButton,
           {
             margin: theme.spacing.l,
+            padding: theme.spacing.m,
           },
         ]}>
         <Icon name={iconName} size={BUTTON_SIZE / 2} color={color} />
