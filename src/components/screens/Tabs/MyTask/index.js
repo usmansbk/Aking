@@ -20,6 +20,8 @@ export default function MyTask() {
         onPressRightIcon={() => null}
       />
       <Tab.Navigator
+        initialRouteName="Today"
+        backBehavior="initialRoute"
         tabBarOptions={{
           labelStyle: {
             fontFamily: 'Medium',
