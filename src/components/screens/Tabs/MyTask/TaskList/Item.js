@@ -1,5 +1,11 @@
 import React, {useRef, useState} from 'react';
-import {View, StyleSheet, Dimensions, Animated} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Animated,
+  PanResponder,
+} from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import {useTheme} from '@config/theme';
 import {Text, CheckBox, Icon} from '@components/common';
@@ -59,7 +65,22 @@ export default function Item({title, time, completed}) {
   const theme = useTheme();
   const slideX = useRef(new Animated.Value(0)).current;
   const [checked, setCheck] = useState(completed);
-  const [openAction, toggleAction] = useState(false);
+
+  // Here we handle the swiping animation
+  const pan = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderMove: Animated.event([null, {dx: slideX}], {
+        useNativeDriver: false,
+      }),
+      onPanResponderRelease: (e, gestureState) => {
+        if (SHIFT < gestureState.dx) {
+          slideX.setValue(0);
+        }
+      },
+    }),
+  ).current;
+
   const completedStyle = checked
     ? {
         textDecorationLine: 'line-through',
@@ -70,22 +91,17 @@ export default function Item({title, time, completed}) {
   return (
     <View>
       <Animated.View
+        {...pan.panHandlers}
         style={[
           styles.animatedView,
           {
             transform: [
               {
-                translateX: openAction
-                  ? slideX.interpolate({
-                      inputRange: [0, 100],
-                      outputRange: [SHIFT, 0],
-                      extrapolate: 'clamp',
-                    })
-                  : slideX.interpolate({
-                      inputRange: [0, 100],
-                      outputRange: [0, SHIFT],
-                      extrapolate: 'clamp',
-                    }),
+                translateX: slideX.interpolate({
+                  inputRange: [SHIFT, 0],
+                  outputRange: [SHIFT, 0],
+                  extrapolate: 'clamp',
+                }),
               },
             ],
           },
@@ -100,7 +116,7 @@ export default function Item({title, time, completed}) {
               borderRadius: theme.shape.radius,
             },
           ]}
-          onPress={() => toggleAction(!openAction)}>
+          onPress={() => null}>
           <CheckBox checked={checked} onPress={setCheck} />
           <View
             style={[
