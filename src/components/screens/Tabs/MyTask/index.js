@@ -22,6 +22,7 @@ export default function MyTask() {
       />
       <Tab.Navigator
         initialRouteName="Today"
+        swipeEnabled={false}
         backBehavior="initialRoute"
         tabBarOptions={{
           labelStyle: {
