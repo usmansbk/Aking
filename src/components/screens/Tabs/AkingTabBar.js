@@ -1,6 +1,6 @@
 // https://reactnavigation.org/docs/bottom-tab-navigator/
 import React from 'react';
-import {TouchableOpacity, View, StyleSheet} from 'react-native';
+import {TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
 import {Text, Icon} from '@components/common';
 import {useTheme} from '@config/theme';
 
@@ -105,22 +105,24 @@ const TabButton = ({
 }) => {
   const theme = useTheme();
   return (
-    <TouchableOpacity
+    <TouchableWithoutFeedback
       onPress={onPress}
       onLongPress={onLongPress}
       accessibilityRole="button"
       accessibilityState={isFocused ? {selected: true} : {}}
-      accessibilityLabel={options.tabBarAccessibilityLabel}
-      style={[
-        styles.tabButton,
-        {
-          margin: theme.spacing.l,
-        },
-      ]}>
-      <Icon name={iconName} size={BUTTON_SIZE / 2} color={color} />
-      <Text variant="tabLabel" style={{color, marginTop: theme.spacing.xs}}>
-        {label}
-      </Text>
-    </TouchableOpacity>
+      accessibilityLabel={options.tabBarAccessibilityLabel}>
+      <View
+        style={[
+          styles.tabButton,
+          {
+            margin: theme.spacing.l,
+          },
+        ]}>
+        <Icon name={iconName} size={BUTTON_SIZE / 2} color={color} />
+        <Text variant="tabLabel" style={{color, marginTop: theme.spacing.xs}}>
+          {label}
+        </Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
