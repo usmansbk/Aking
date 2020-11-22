@@ -7,6 +7,8 @@ import Person from '@assets/svgs/Person.svg';
 import Options from '@assets/svgs/Options.svg';
 import Checked from '@assets/svgs/Checked.svg';
 import Unchecked from '@assets/svgs/Unchecked.svg';
+import Pen from '@assets/svgs/Pen.svg';
+import Trash from '@assets/svgs/Trash.svg';
 import {useTheme} from '@config/theme';
 
 export default function Icon({size = 24, color, name}) {
@@ -38,6 +40,12 @@ export default function Icon({size = 24, color, name}) {
       break;
     case 'unchecked':
       Component = Unchecked;
+      break;
+    case 'pen':
+      Component = Pen;
+      break;
+    case 'trash':
+      Component = Trash;
       break;
     default:
       Component = ArrowLeft;
