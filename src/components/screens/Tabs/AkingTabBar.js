@@ -1,7 +1,7 @@
 // https://reactnavigation.org/docs/bottom-tab-navigator/
 import React from 'react';
 import {TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
-import {Text, Icon} from '@components/common';
+import {Text, Icon, FAB} from '@components/common';
 import {useTheme} from '@config/theme';
 
 const BUTTON_SIZE = 48;
