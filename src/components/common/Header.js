@@ -20,7 +20,9 @@ const styles = StyleSheet.create({
 export default function Header({
   title,
   leftIcon,
+  rightIcon,
   onPressLeftIcon,
+  onPressRightIcon,
   backgroundColor,
   barStyle,
 }) {
@@ -44,10 +46,15 @@ export default function Header({
           <IconButton name={leftIcon} onPress={onPressLeftIcon} />
         )}
         <View style={styles.title}>
-          <Text color={barStyle === 'dark-content' ? 'text' : 'contrast'}>
+          <Text
+            variant="headerTitle"
+            color={barStyle === 'dark-content' ? 'text' : 'contrast'}>
             {title}
           </Text>
         </View>
+        {!!onPressRightIcon && (
+          <IconButton name={rightIcon} onPress={onPressRightIcon} />
+        )}
       </View>
     </>
   );

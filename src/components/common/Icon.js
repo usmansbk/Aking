@@ -4,6 +4,7 @@ import Check from '@assets/svgs/Check.svg';
 import List from '@assets/svgs/List.svg';
 import Menu from '@assets/svgs/Menu.svg';
 import Person from '@assets/svgs/Person.svg';
+import Options from '@assets/svgs/Options.svg';
 import {useTheme} from '@config/theme';
 
 export default function Icon({size = 24, color, name}) {
@@ -26,6 +27,9 @@ export default function Icon({size = 24, color, name}) {
       break;
     case 'person':
       Component = Person;
+      break;
+    case 'options':
+      Component = Options;
       break;
     default:
       Component = ArrowLeft;

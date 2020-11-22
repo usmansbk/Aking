@@ -11,8 +11,10 @@ export default function Menu() {
         title="Work List"
         barStyle="light-content"
         backgroundColor={theme.palatte.primary.main}
+        rightIcon="options"
+        onPressRightIcon={() => null}
       />
-      <Container></Container>
+      <Container />
     </>
   );
 }

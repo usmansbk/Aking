@@ -32,6 +32,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     letterSpacing: 0.14,
   },
+  headerTitle: {
+    fontFamily: 'Demi',
+    fontSize: 20,
+    lineHeight: 41,
+  },
 });
 
 export default function AkingText({
