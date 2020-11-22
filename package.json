@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "clean": "cd ./android && ./gradlew clean && cd .."
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
