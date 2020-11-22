@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  icon: {
+    width: 48,
+  },
 });
 
 export default function Header({
@@ -42,9 +45,11 @@ export default function Header({
             height: theme.spacing.l * 4,
           },
         ]}>
-        {!!onPressLeftIcon && (
-          <IconButton name={leftIcon} onPress={onPressLeftIcon} />
-        )}
+        <View style={styles.icon}>
+          {!!onPressLeftIcon && (
+            <IconButton name={leftIcon} onPress={onPressLeftIcon} />
+          )}
+        </View>
         <View style={styles.title}>
           <Text
             variant="headerTitle"
@@ -52,9 +57,11 @@ export default function Header({
             {title}
           </Text>
         </View>
-        {!!onPressRightIcon && (
-          <IconButton name={rightIcon} onPress={onPressRightIcon} />
-        )}
+        <View style={styles.icon}>
+          {!!onPressRightIcon && (
+            <IconButton name={rightIcon} onPress={onPressRightIcon} />
+          )}
+        </View>
       </View>
     </>
   );
