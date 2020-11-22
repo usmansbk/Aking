@@ -1,5 +1,5 @@
 // https://reactnavigation.org/docs/bottom-tab-navigator/
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import {Text, Icon, FAB} from '@components/common';
@@ -44,73 +44,75 @@ export default function AkingTabBar({state, descriptors, navigation}) {
           paddingVertical: theme.spacing.xs,
         },
       ]}>
-      {routes.map((route, index) => {
-        const {options} = descriptors[route.key];
-        const {name} = route;
-        let iconName;
-        let label = name;
-        if (name === 'MyTask') {
-          iconName = 'check';
-          label = 'My Task';
-        } else if (name === 'Menu') {
-          iconName = 'menu';
-        } else if (name === 'Quick') {
-          iconName = 'list';
-        } else {
-          iconName = 'person';
-        }
-        const isFocused = state.index === index;
-        const color = isFocused
-          ? theme.palatte.tabBar.activeTintColor
-          : theme.palatte.tabBar.inactiveTintColor;
-
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
-
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
-          }
-        };
-
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
-        };
-
-        return (
-          <TabButton
-            key={index}
-            isFocused={isFocused}
-            iconName={iconName}
-            label={label}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            options={options}
-            color={color}
-          />
-        );
-      })}
+      <TabButton
+        navigation={navigation}
+        route={routes[0]}
+        isFocused={state.index === 0}
+        descriptors={descriptors}
+      />
+      <TabButton
+        navigation={navigation}
+        route={routes[1]}
+        isFocused={state.index === 1}
+        descriptors={descriptors}
+      />
+      <FAB />
+      <TabButton
+        navigation={navigation}
+        route={routes[2]}
+        isFocused={state.index === 2}
+        descriptors={descriptors}
+      />
+      <TabButton
+        navigation={navigation}
+        route={routes[3]}
+        isFocused={state.index === 3}
+        descriptors={descriptors}
+      />
     </View>
   );
 }
 
-const TabButton = ({
-  onPress,
-  onLongPress,
-  isFocused,
-  options,
-  iconName,
-  color,
-  label,
-}) => {
+const TabButton = ({isFocused, descriptors, navigation, route}) => {
   const theme = useTheme();
+  const {options} = descriptors[route.key];
+  const {name, key} = route;
+  let iconName;
+  let label = name;
+  if (name === 'MyTask') {
+    iconName = 'check';
+    label = 'My Task';
+  } else if (name === 'Menu') {
+    iconName = 'menu';
+  } else if (name === 'Quick') {
+    iconName = 'list';
+  } else {
+    iconName = 'person';
+  }
+  const color = isFocused
+    ? theme.palatte.tabBar.activeTintColor
+    : theme.palatte.tabBar.inactiveTintColor;
+
+  const onPress = useCallback(() => {
+    const event = navigation.emit({
+      type: 'tabPress',
+      target: key,
+      canPreventDefault: true,
+    });
+
+    if (!isFocused && !event.defaultPrevented) {
+      navigation.navigate(route.name);
+    }
+  }, [isFocused, navigation, key, route.name]);
+
+  const onLongPress = useCallback(() => {
+    navigation.emit({
+      type: 'tabLongPress',
+      target: key,
+      canPreventDefault: true,
+    });
+  }, [navigation, key]);
+
   return (
     <TouchableWithoutFeedback
       onPress={onPress}
