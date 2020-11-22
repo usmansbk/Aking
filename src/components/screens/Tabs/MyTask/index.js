@@ -1,3 +1,4 @@
+// https://reactnavigation.org/docs/material-top-tab-navigator
 import React from 'react';
 import {Header} from '@components/common';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
