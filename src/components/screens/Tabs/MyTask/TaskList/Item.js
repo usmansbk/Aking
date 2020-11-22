@@ -89,6 +89,21 @@ export default function Item({title, time, completed}) {
     }),
   ).current;
 
+  const close = () => {
+    Animated.timing(slideX, {
+      toValue: 0,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const onEdit = () => {
+    close();
+  };
+
+  const onDelete = () => {
+    close();
+  };
+
   const completedStyle = checked
     ? {
         textDecorationLine: 'line-through',
@@ -151,8 +166,8 @@ export default function Item({title, time, completed}) {
         </RectButton>
       </Animated.View>
       <View style={styles.actionBox}>
-        <Action icon="pen" />
-        <Action icon="trash" />
+        <Action icon="pen" onPress={onEdit} />
+        <Action icon="trash" onPress={onDelete} />
       </View>
     </View>
   );
