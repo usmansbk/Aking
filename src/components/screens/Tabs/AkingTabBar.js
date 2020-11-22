@@ -49,6 +49,7 @@ export default function AkingTabBar({state, descriptors, navigation}) {
         {
           backgroundColor: theme.palatte.secondary.dark,
           paddingVertical: theme.spacing.xs,
+          paddingHorizontal: theme.spacing.m,
         },
       ]}>
       <TabButton
@@ -133,7 +134,7 @@ const TabButton = ({isFocused, descriptors, navigation, route}) => {
         style={[
           styles.tabButton,
           {
-            margin: theme.spacing.l,
+            marginVertical: theme.spacing.l,
             padding: theme.spacing.m,
           },
         ]}>
