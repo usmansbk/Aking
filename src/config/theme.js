@@ -17,6 +17,7 @@ const colors = {
   gray5: '#F9F9F9',
   gray6: '#9A9A9A',
   gray7: '#9E9E9E',
+  backdrop: '#979797',
   iconBlack: '#1E201D',
 };
 
