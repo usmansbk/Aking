@@ -8,6 +8,7 @@ import TextInput from './TextInput';
 import FAB from './FAB';
 import StatusBar from './StatusBar';
 import CheckBox from './CheckBox';
+import Calendar from './Calendar';
 
 export {
   Text,
@@ -20,4 +21,5 @@ export {
   FAB,
   TextInput,
   CheckBox,
+  Calendar,
 };
