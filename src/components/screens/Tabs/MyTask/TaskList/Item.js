@@ -70,6 +70,8 @@ export default function Item({title, time, completed}) {
   const pan = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponderCapture: () => true,
+      onPanResponderTerminationRequest: () => false,
       onPanResponderGrant: () => {
         slideX.setOffset(slideX._value);
       },
@@ -79,7 +81,7 @@ export default function Item({title, time, completed}) {
       onPanResponderRelease: (_, gestureState) => {
         const {dx} = gestureState;
         if (SHIFT < dx) {
-          Animated.timing(slideX, {
+          Animated.spring(slideX, {
             toValue: 0,
             useNativeDriver: false,
           }).start();
