@@ -10,6 +10,8 @@ import Unchecked from '@assets/svgs/Unchecked.svg';
 import Pen from '@assets/svgs/Pen.svg';
 import Trash from '@assets/svgs/Trash.svg';
 import Mark from '@assets/svgs/Mark.svg';
+import ChevronUp from '@assets/svgs/ChevronUp.svg';
+import ChevronDown from '@assets/svgs/ChevronDown.svg';
 import {useTheme} from '@config/theme';
 
 export default function Icon({size = 24, color, name}) {
@@ -50,6 +52,12 @@ export default function Icon({size = 24, color, name}) {
       break;
     case 'mark':
       Component = Mark;
+      break;
+    case 'chevron-up':
+      Component = ChevronUp;
+      break;
+    case 'chevron-down':
+      Component = ChevronDown;
       break;
     default:
       Component = ArrowLeft;
