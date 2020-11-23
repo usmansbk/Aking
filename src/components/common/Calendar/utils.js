@@ -38,10 +38,16 @@ const NUMBER_DAYS_IN_WEEK = 7;
 export function getWeekDates(date) {
   const momentDate = moment(date);
   const numberOfDays = momentDate.daysInMonth();
+  const firstDay = momentDate.clone().date(1).startOf('week');
+  const endDay = momentDate.clone().date(numberOfDays).endOf('week');
 
   const calendar = [];
 
-  for (let i = 1; i <= numberOfDays; i += NUMBER_DAYS_IN_WEEK) {
+  for (
+    let i = 1;
+    i <= endDay.diff(firstDay, 'days');
+    i += NUMBER_DAYS_IN_WEEK
+  ) {
     const startOfWeek = momentDate.clone().date(i).startOf('week');
     let week = [];
     for (let j = 0; j < NUMBER_DAYS_IN_WEEK; j++) {
