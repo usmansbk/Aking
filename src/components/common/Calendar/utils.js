@@ -33,21 +33,16 @@ export function isDateMarked(dates = [], date) {
 }
 
 const NUMBER_DAYS_IN_WEEK = 7;
-// This function returns a multidimentional representation
+const WEEKS_PER_PAGE = 6;
+const TOTAL_DAYS_PER_PAGE = NUMBER_DAYS_IN_WEEK * WEEKS_PER_PAGE;
+// This function returns a [7 x 6] grid representation
 // of a month calendar
 export function getWeekDates(date) {
   const momentDate = moment(date);
-  const numberOfDays = momentDate.daysInMonth();
-  const firstDay = momentDate.clone().date(1).startOf('week');
-  const endDay = momentDate.clone().date(numberOfDays).endOf('week');
 
   const calendar = [];
 
-  for (
-    let i = 1;
-    i <= endDay.diff(firstDay, 'days');
-    i += NUMBER_DAYS_IN_WEEK
-  ) {
+  for (let i = 1; i <= TOTAL_DAYS_PER_PAGE; i += NUMBER_DAYS_IN_WEEK) {
     const startOfWeek = momentDate.clone().date(i).startOf('week');
     let week = [];
     for (let j = 0; j < NUMBER_DAYS_IN_WEEK; j++) {
