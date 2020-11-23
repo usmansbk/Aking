@@ -14,6 +14,7 @@ import moment from 'moment';
 const {width} = Dimensions.get('window');
 const ITEM_HEIGHT = 70;
 const SHIFT = -(width * 0.4);
+const DELTA_DRAG = SHIFT * 0.2;
 
 const styles = StyleSheet.create({
   container: {
@@ -75,9 +76,11 @@ export default function Item({title, time, completed}) {
       onPanResponderGrant: () => {
         slideX.setOffset(slideX._value);
       },
-      onPanResponderMove: Animated.event([null, {dx: slideX}], {
-        useNativeDriver: false,
-      }),
+      onPanResponderMove: (_, gestureState) => {
+        if (gestureState.dx < DELTA_DRAG) {
+          slideX.setValue(gestureState.dx - DELTA_DRAG);
+        }
+      },
       onPanResponderRelease: (_, gestureState) => {
         const {dx} = gestureState;
         if (SHIFT < dx) {
@@ -123,7 +126,7 @@ export default function Item({title, time, completed}) {
             transform: [
               {
                 translateX: slideX.interpolate({
-                  inputRange: [SHIFT, 0],
+                  inputRange: [SHIFT - DELTA_DRAG, 0],
                   outputRange: [SHIFT, 0],
                   extrapolate: 'clamp',
                 }),
