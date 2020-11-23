@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import moment from 'moment';
 import Text from '../Text';
 import Icon from '../Icon';
 import {useTheme} from '@config/theme';
-import {range, dates} from './utils';
+import {formatMonth} from './utils';
 
 const styles = StyleSheet.create({
   header: {
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
 
 export default function Calendar() {
   const theme = useTheme();
-  const [date, setDate] = useState(new Date());
+  const [date] = useState(new Date());
   return (
     <View
       style={[
@@ -61,14 +60,14 @@ function WeekHeader() {
   );
 }
 
-function MonthHeader({onPress, date = moment().toISOString(), expanded}) {
+function MonthHeader({onPress, date = new Date(), expanded}) {
   const theme = useTheme();
   return (
     <TouchableOpacity
       onPress={onPress}
       style={[styles.header, {paddingVertical: theme.spacing.l}]}>
       <Text variant="sectionHeader" style={{marginRight: theme.spacing.s}}>
-        {moment(date).format('MMMM YYYY').toUpperCase()}
+        {formatMonth(date)}
       </Text>
       <Icon name={expanded ? 'chevron-down' : 'chevron-up'} size={14} />
     </TouchableOpacity>
