@@ -35,9 +35,6 @@ export default function MyTask() {
   const theme = useTheme();
   const menuRef = useRef(null);
   const [option, setOption] = useState('incomplete');
-  const onSelectOption = (value) => {
-    console.log(value);
-  };
 
   return (
     <>
