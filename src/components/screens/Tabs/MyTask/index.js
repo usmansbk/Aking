@@ -5,6 +5,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import Today from './Today';
 import Month from './Month';
 import {useTheme} from '@config/theme';
+import {IconButton} from '@components/common';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -17,8 +18,7 @@ export default function MyTask() {
         title="Work List"
         barStyle="light-content"
         backgroundColor={theme.palatte.primary.main}
-        rightIcon="options"
-        onPressRightIcon={() => null}
+        rightIcon={() => <IconButton name="options" />}
       />
       <Tab.Navigator
         initialRouteName="Today"

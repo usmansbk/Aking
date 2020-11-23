@@ -59,7 +59,7 @@ export default function Icon({size = 24, color, name}) {
     <Component
       width={size}
       height={size}
-      fill={color || theme.colors.iconBlack}
+      fill={color || theme.colors.black}
       fillSecondary={theme.palatte.background.main}
     />
   );

@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer} from '@react-navigation/native';
+import {MenuProvider} from 'react-native-popup-menu';
 import ThemeProvider, {theme} from '@config/theme';
 import Screens from '@components/screens';
 
@@ -16,7 +17,9 @@ export default function App() {
   return (
     <ThemeProvider value={theme}>
       <NavigationContainer>
-        <Screens />
+        <MenuProvider>
+          <Screens />
+        </MenuProvider>
       </NavigationContainer>
     </ThemeProvider>
   );
