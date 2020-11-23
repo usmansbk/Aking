@@ -3,7 +3,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import {useScrollToTop} from '@react-navigation/native';
 import {Text} from '@components/common';
 import {useTheme} from '@config/theme';
-import {singleDay as data} from './data';
+import {singleDay} from './data';
 import Item from './Item';
 
 const styles = StyleSheet.create({
@@ -32,11 +32,13 @@ export default function FlatTaskList() {
       contentContainerStyle={{
         padding: theme.spacing.l,
       }}
-      data={data}
+      data={singleDay.data}
       keyExtractor={(item) => item.id}
       initialNumToRender={1}
       renderItem={renderItem}
-      ListHeaderComponent={ListHeaderComponent}
+      ListHeaderComponent={() => (
+        <ListHeaderComponent title={singleDay.title} />
+      )}
       ItemSeparatorComponent={SeparatorComponent}
     />
   );
@@ -46,16 +48,15 @@ const renderItem = ({item}) => {
   return <Item {...item} />;
 };
 
-const ListHeaderComponent = (props) => {
+const ListHeaderComponent = ({title}) => {
   const theme = useTheme();
-  console.log(props);
-  const title = 'title';
   return (
     <View
       style={[
         {
           backgroundColor: theme.palatte.background.list,
-          paddingVertical: theme.spacing.s,
+          paddingVertical: theme.spacing.m,
+          marginVertical: theme.spacing.s,
         },
       ]}>
       <Text variant="sectionHeader" color="sectionHeader">
