@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
 export default function Calendar() {
   const theme = useTheme();
-  const [date, setDate] = useState(getDate(1));
+  const [date, setDate] = useState(getDate());
   return (
     <View
       style={[
