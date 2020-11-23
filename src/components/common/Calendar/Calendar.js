@@ -22,7 +22,8 @@ import {
 } from './utils';
 
 const DAY_SIZE = 48;
-const MINIMUM_DRAG = 20;
+const MINIMUM_DRAG = 10;
+const CALENDAR_HEIGHT = '45%';
 
 const styles = StyleSheet.create({
   monthHeader: {
@@ -33,6 +34,9 @@ const styles = StyleSheet.create({
   weekHeader: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  weeks: {
+    height: CALENDAR_HEIGHT,
   },
   weekRow: {
     flexDirection: 'row',
@@ -57,6 +61,8 @@ export default function CalendarHOC(props) {
   return <Calendar theme={theme} {...props} />;
 }
 
+// PanResponder in Functional component doesn't allow us to manipulate useState
+// so we switch to Class component
 class Calendar extends React.Component {
   panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
@@ -92,7 +98,7 @@ class Calendar extends React.Component {
         ]}>
         <MonthHeader date={date} />
         <WeekHeader />
-        <Animated.View {...this.panResponder.panHandlers}>
+        <Animated.View style={styles.weeks} {...this.panResponder.panHandlers}>
           <Weeks
             dots={dots}
             date={date}
