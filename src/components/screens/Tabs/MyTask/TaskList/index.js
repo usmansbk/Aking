@@ -1,3 +1,5 @@
-import List from './List';
+import SectionList from './SectionList';
+import FlatTaskList from './FlatList';
 
-export default List;
+export {FlatTaskList};
+export default SectionList;

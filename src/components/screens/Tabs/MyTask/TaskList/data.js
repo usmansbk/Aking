@@ -14,6 +14,27 @@ function getTitle(date = moment()) {
   return moment(date).calendar(null, CALENDAR_FORMAT).toUpperCase();
 }
 
+export const singleDay = [
+  {
+    id: shortid.generate(),
+    title: 'Go fishing with Stephen',
+    time: moment().toISOString(),
+    completed: false,
+  },
+  {
+    id: shortid.generate(),
+    title: 'Meet according with design team',
+    time: moment().add(1, 'hour').toISOString(),
+    completed: true,
+  },
+  {
+    id: shortid.generate(),
+    title: 'Go fishing with Stephen',
+    time: moment().add(3, 'hours').toISOString(),
+    completed: false,
+  },
+];
+
 export default [
   {
     title: getTitle(),

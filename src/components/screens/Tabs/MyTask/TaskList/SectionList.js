@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function TaskList() {
+export default function SectionTaskList() {
   const theme = useTheme();
   const scrollRef = useRef(null);
   useScrollToTop(scrollRef);
