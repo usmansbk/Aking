@@ -23,7 +23,6 @@ import {
 
 const DAY_SIZE = 48;
 const MINIMUM_DRAG = 10;
-const CALENDAR_HEIGHT = '45%';
 
 const styles = StyleSheet.create({
   monthHeader: {
@@ -35,9 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-  weeks: {
-    height: CALENDAR_HEIGHT,
-  },
+  weeks: {},
   weekRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
