@@ -12,6 +12,7 @@ import Trash from '@assets/svgs/Trash.svg';
 import Mark from '@assets/svgs/Mark.svg';
 import ChevronUp from '@assets/svgs/ChevronUp.svg';
 import ChevronDown from '@assets/svgs/ChevronDown.svg';
+import Dot from '@assets/svgs/Dot.svg';
 import {useTheme} from '@config/theme';
 
 export default function Icon({size = 24, color, name}) {
@@ -58,6 +59,9 @@ export default function Icon({size = 24, color, name}) {
       break;
     case 'chevron-down':
       Component = ChevronDown;
+      break;
+    case 'dot':
+      Component = Dot;
       break;
     default:
       Component = ArrowLeft;
