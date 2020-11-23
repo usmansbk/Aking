@@ -9,7 +9,9 @@ import {
   getWeekDates,
   formatDay,
   isSameDay,
+  dateString,
   getDate,
+  isDateMarked,
 } from './utils';
 
 const DAY_SIZE = 48;
@@ -36,9 +38,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  dot: {
+    position: 'absolute',
+    bottom: 4,
+  },
 });
 
-export default function Calendar() {
+export default function Calendar({
+  dots = [dateString(2), dateString(5), dateString(-20)],
+}) {
   const theme = useTheme();
   const [date, setDate] = useState(getDate());
   return (
@@ -52,7 +60,11 @@ export default function Calendar() {
       ]}>
       <MonthHeader date={date} />
       <WeekHeader />
-      <Weeks date={date} onDateChange={(newDate) => setDate(newDate)} />
+      <Weeks
+        dots={dots}
+        date={date}
+        onDateChange={(newDate) => setDate(newDate)}
+      />
     </View>
   );
 }
@@ -88,18 +100,24 @@ function WeekHeader() {
   );
 }
 
-function Weeks({date, onDateChange = () => null}) {
+function Weeks({date, onDateChange = () => null, dots = []}) {
   const weeks = getWeekDates(date);
   return (
     <View>
       {weeks.map((week, index) => (
-        <Week key={index} week={week} date={date} onDateChange={onDateChange} />
+        <Week
+          key={index}
+          week={week}
+          date={date}
+          onDateChange={onDateChange}
+          dots={dots}
+        />
       ))}
     </View>
   );
 }
 
-function Week({week = [], date, onDateChange}) {
+function Week({week = [], date, onDateChange, dots = []}) {
   return (
     <View style={styles.weekRow}>
       {week.map((day, index) => (
@@ -108,13 +126,14 @@ function Week({week = [], date, onDateChange}) {
           day={day}
           isCurrentDate={isSameDay(date, day.date)}
           onPress={onDateChange}
+          dot={isDateMarked(dots, day.date)}
         />
       ))}
     </View>
   );
 }
 
-function Day({day, isCurrentDate, onPress}) {
+function Day({day, isCurrentDate, onPress, dot}) {
   const theme = useTheme();
   let colors = theme.palatte.date;
 
@@ -147,6 +166,11 @@ function Day({day, isCurrentDate, onPress}) {
         }}>
         {formatDay(day.date)}
       </Text>
+      {dot && (
+        <View style={styles.dot}>
+          <Icon name="dot" size={5} />
+        </View>
+      )}
     </RectButton>
   );
 }

@@ -4,6 +4,10 @@ export function getDate(after = 0) {
   return moment().add(after, 'day');
 }
 
+export function dateString(after) {
+  return getDate(after).startOf('day').toISOString();
+}
+
 export function formatMonth(date) {
   return moment(date).format('MMMM YYYY').toUpperCase();
 }
@@ -14,6 +18,10 @@ export function isSameDay(day1, day2) {
 
 export function formatDay(date) {
   return moment(date).format('D');
+}
+
+export function isDateMarked(dates = [], date) {
+  return dates.includes(date);
 }
 
 const NUMBER_DAYS_IN_WEEK = 7;
