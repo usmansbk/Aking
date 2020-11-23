@@ -55,8 +55,8 @@ const ListHeaderComponent = ({title}) => {
       style={[
         {
           backgroundColor: theme.palatte.background.list,
-          paddingVertical: theme.spacing.m,
-          marginVertical: theme.spacing.s,
+          paddingVertical: theme.spacing.s,
+          marginBottom: theme.spacing.s,
         },
       ]}>
       <Text variant="sectionHeader" color="sectionHeader">
