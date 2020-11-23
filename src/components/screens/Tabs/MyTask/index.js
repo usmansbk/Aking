@@ -1,16 +1,43 @@
 // https://reactnavigation.org/docs/material-top-tab-navigator
-import React from 'react';
+import React, {useRef, useState} from 'react';
+import {View, StyleSheet} from 'react-native';
 import {Header} from '@components/common';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Today from './Today';
 import Month from './Month';
 import {useTheme} from '@config/theme';
-import {IconButton} from '@components/common';
+import {IconButton, Text, Icon} from '@components/common';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
 
 const Tab = createMaterialTopTabNavigator();
 
+const options = [
+  {
+    text: 'Incomplete Tasks',
+    id: 'incomplete',
+  },
+  {
+    text: 'Completed Task',
+    id: 'completed',
+  },
+  {
+    text: 'All Tasks',
+    id: 'all',
+  },
+];
+
 export default function MyTask() {
   const theme = useTheme();
+  const menuRef = useRef(null);
+  const [option, setOption] = useState('incomplete');
+  const onSelectOption = (value) => {
+    console.log(value);
+  };
 
   return (
     <>
@@ -18,7 +45,37 @@ export default function MyTask() {
         title="Work List"
         barStyle="light-content"
         backgroundColor={theme.palatte.primary.main}
-        rightIcon={() => <IconButton name="options" />}
+        rightIcon={() => {
+          return (
+            <Menu ref={menuRef}>
+              <IconButton
+                name="options"
+                onPress={() => menuRef.current.open()}
+              />
+              <MenuTrigger />
+              <MenuOptions
+                customStyles={{
+                  optionWrapper: {
+                    padding: theme.spacing.l,
+                  },
+                  optionsContainer: {
+                    borderRadius: theme.shape.radius,
+                  },
+                }}>
+                {options.map((currentOption, index) => (
+                  <MenuOption
+                    key={index}
+                    onSelect={() => setOption(currentOption.id)}>
+                    <MenuItem
+                      text={currentOption.text}
+                      marked={currentOption.id === option}
+                    />
+                  </MenuOption>
+                ))}
+              </MenuOptions>
+            </Menu>
+          );
+        }}
       />
       <Tab.Navigator
         initialRouteName="Today"
@@ -49,3 +106,21 @@ export default function MyTask() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  optionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+});
+
+const MenuItem = ({text, marked}) => {
+  const theme = useTheme();
+  return (
+    <View style={styles.optionContainer}>
+      <Text variant="optionText">{text}</Text>
+      {marked && <Icon name="mark" size={16} color={theme.colors.green} />}
+    </View>
+  );
+};

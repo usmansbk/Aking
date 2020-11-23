@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Demi',
     fontSize: 14,
   },
+  optionText: {
+    fontFamily: 'Demi',
+    fontSize: 17,
+  },
 });
 
 export default function AkingText({

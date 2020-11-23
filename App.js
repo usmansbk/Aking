@@ -17,7 +17,7 @@ export default function App() {
   return (
     <ThemeProvider value={theme}>
       <NavigationContainer>
-        <MenuProvider>
+        <MenuProvider backHandler>
           <Screens />
         </MenuProvider>
       </NavigationContainer>
