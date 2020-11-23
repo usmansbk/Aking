@@ -59,6 +59,18 @@ export const theme = {
       activeTintColor: colors.white,
       inactiveTintColor: colors.gray4,
     },
+    today: {
+      backgroundColor: colors.green,
+      text: colors.black,
+    },
+    selectedDay: {
+      backgroundColor: colors.blue,
+      text: colors.white,
+    },
+    date: {
+      backgroundColor: colors.white,
+      text: colors.black,
+    },
   },
   spacing: {
     xs: 2,
