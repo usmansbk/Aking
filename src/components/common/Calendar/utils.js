@@ -1,5 +1,13 @@
 import moment from 'moment';
 
+export function nextMonth(date) {
+  return moment(date).add(1, 'month').toISOString();
+}
+
+export function previousMonth(date) {
+  return moment(date).subtract(1, 'month').toISOString();
+}
+
 export function getDate(after = 0) {
   return moment().add(after, 'day');
 }

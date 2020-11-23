@@ -1,5 +1,11 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  PanResponder,
+  Animated,
+} from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import Text from '../Text';
 import Icon from '../Icon';
@@ -9,12 +15,14 @@ import {
   getWeekDates,
   formatDay,
   isSameDay,
-  dateString,
   getDate,
   isDateMarked,
+  nextMonth,
+  previousMonth,
 } from './utils';
 
 const DAY_SIZE = 48;
+const MINIMUM_DRAG = 20;
 
 const styles = StyleSheet.create({
   monthHeader: {
@@ -44,29 +52,56 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Calendar({
-  dots = [dateString(2), dateString(5), dateString(-20)],
-}) {
+export default function CalendarHOC(props) {
   const theme = useTheme();
-  const [date, setDate] = useState(getDate());
-  return (
-    <View
-      style={[
-        {
-          backgroundColor: theme.palatte.background.main,
-          elevation: theme.shape.elevation,
-          paddingBottom: theme.spacing.l,
-        },
-      ]}>
-      <MonthHeader date={date} />
-      <WeekHeader />
-      <Weeks
-        dots={dots}
-        date={date}
-        onDateChange={(newDate) => setDate(newDate)}
-      />
-    </View>
-  );
+  return <Calendar theme={theme} {...props} />;
+}
+
+class Calendar extends React.Component {
+  panResponder = PanResponder.create({
+    onMoveShouldSetPanResponder: () => true,
+    onMoveShouldSetPanResponderCapture: () => true,
+    onPanResponderTerminationRequest: () => false,
+    onPanResponderRelease: (_, gestureState) => {
+      if (gestureState.dx > MINIMUM_DRAG) {
+        this.setState({date: previousMonth(this.state.date)});
+      } else if (gestureState.dx < -MINIMUM_DRAG) {
+        this.setState({date: nextMonth(this.state.date)});
+      }
+    },
+  });
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: getDate(),
+    };
+  }
+
+  render() {
+    const {theme, dots} = this.props;
+    const {date} = this.state;
+    return (
+      <View
+        style={[
+          {
+            backgroundColor: theme.palatte.background.main,
+            elevation: theme.shape.elevation,
+            paddingBottom: theme.spacing.l,
+          },
+        ]}>
+        <MonthHeader date={date} />
+        <WeekHeader />
+        <Animated.View {...this.panResponder.panHandlers}>
+          <Weeks
+            dots={dots}
+            date={date}
+            onDateChange={(newDate) => this.setState({date: newDate})}
+          />
+        </Animated.View>
+      </View>
+    );
+  }
 }
 
 function MonthHeader({onPress, date = new Date(), expanded}) {
