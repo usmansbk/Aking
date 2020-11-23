@@ -11,13 +11,38 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  weekdays: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
 });
 
 export default function Calendar() {
+  const theme = useTheme();
   return (
-    <View>
+    <View
+      style={[
+        {
+          backgroundColor: theme.palatte.background.main,
+          elevation: theme.shape.elevation,
+        },
+      ]}>
       <Header />
+      <Week />
       <Text>Calendar</Text>
+    </View>
+  );
+}
+
+const week = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+function Week() {
+  return (
+    <View style={styles.weekdays}>
+      {week.map((day, index) => (
+        <Text key={index} variant="sectionHeader" color="sectionHeader">
+          {day}
+        </Text>
+      ))}
     </View>
   );
 }
