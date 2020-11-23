@@ -34,7 +34,7 @@ export function getWeekDates(date) {
   const calendar = [];
 
   for (let i = 1; i <= numberOfDays; i += NUMBER_DAYS_IN_WEEK) {
-    const startOfWeek = moment().date(i).startOf('week');
+    const startOfWeek = momentDate.clone().date(i).startOf('week');
     let week = [];
     for (let j = 0; j < NUMBER_DAYS_IN_WEEK; j++) {
       const day = startOfWeek.clone().add(j, 'day');
