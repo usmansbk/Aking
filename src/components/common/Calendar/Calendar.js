@@ -85,20 +85,20 @@ class Calendar extends React.Component {
     onPanResponderRelease: (_, gestureState) => {
       this.anim.flattenOffset();
       if (Math.abs(gestureState.dy) > Math.abs(gestureState.dx)) {
-        Animated.spring(this.anim, {
-          toValue:
-            gestureState.dy >= MIN_CALENDAR_HEIGHT
-              ? MAX_CALENDAR_HEIGHT
-              : MIN_CALENDAR_HEIGHT,
-          useNativeDriver: false,
-          bounciness: 0,
-        }).start();
-      } else {
-        if (gestureState.dx > MIN_SWIPE_HORIZONTAL) {
+        if (Math.abs(gestureState.dy) > MIN_DRAG_VERTICAL) {
+          Animated.spring(this.anim, {
+            toValue:
+              gestureState.dy > 0 ? MAX_CALENDAR_HEIGHT : MIN_CALENDAR_HEIGHT,
+            useNativeDriver: false,
+            bounciness: 0,
+          }).start();
+        }
+      } else if (Math.abs(gestureState.dx) > MIN_SWIPE_HORIZONTAL) {
+        if (gestureState.dx > 0) {
           this.setState({
             date: previousMonth(this.state.date),
           });
-        } else if (gestureState.dx < -MIN_SWIPE_HORIZONTAL) {
+        } else {
           this.setState({
             date: nextMonth(this.state.date),
           });
