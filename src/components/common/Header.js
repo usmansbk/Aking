@@ -18,6 +18,9 @@ const styles = StyleSheet.create({
   icon: {
     width: 48,
   },
+  expand: {
+    alignItems: 'flex-start',
+  },
 });
 
 export default function Header({
@@ -28,6 +31,7 @@ export default function Header({
   backgroundColor,
   barStyle,
   iconColor,
+  expand,
 }) {
   const theme = useTheme();
   return (
@@ -42,8 +46,9 @@ export default function Header({
           {
             padding: theme.spacing.m,
             backgroundColor: backgroundColor || theme.palatte.background.main,
-            height: theme.spacing.l * 4,
+            height: theme.spacing.l * (expand ? 7 : 4),
           },
+          expand ? styles.expand : {},
         ]}>
         <View style={styles.icon}>
           {!!onPressLeftIcon && (

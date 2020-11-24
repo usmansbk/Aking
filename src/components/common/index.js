@@ -9,6 +9,7 @@ import FAB from './FAB';
 import StatusBar from './StatusBar';
 import CheckBox from './CheckBox';
 import Calendar from './Calendar';
+import Footer from './Footer';
 
 export {
   Text,
@@ -22,4 +23,5 @@ export {
   TextInput,
   CheckBox,
   Calendar,
+  Footer,
 };
