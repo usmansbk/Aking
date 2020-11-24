@@ -57,6 +57,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Demi',
     fontSize: 14,
   },
+  searchTitle: {
+    fontFamily: 'Demi',
+    fontSize: 16,
+  },
+  searchSubtitle: {
+    fontFamily: 'Medium',
+    fontSize: 14,
+  },
 });
 
 export default function AkingText({
