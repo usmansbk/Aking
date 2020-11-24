@@ -119,11 +119,13 @@ class Calendar extends React.Component {
             },
           ]}
           {...this.panResponder.panHandlers}>
-          <Weeks
-            dots={markedDates}
-            date={date}
-            onDateChange={(newDate) => this.setState({date: newDate})}
-          />
+          <ScrollView scrollEnabled={false}>
+            <Weeks
+              dots={markedDates}
+              date={date}
+              onDateChange={(newDate) => this.setState({date: newDate})}
+            />
+          </ScrollView>
         </Animated.View>
       </View>
     );
@@ -162,19 +164,15 @@ function WeekHeader() {
 
 function Weeks({date, onDateChange = () => null, dots = []}) {
   const weeks = getWeekDates(date);
-  return (
-    <ScrollView scrollEnabled={false}>
-      {weeks.map((week, index) => (
-        <Week
-          key={index}
-          week={week}
-          date={date}
-          onDateChange={onDateChange}
-          dots={dots}
-        />
-      ))}
-    </ScrollView>
-  );
+  return weeks.map((week, index) => (
+    <Week
+      key={index}
+      week={week}
+      date={date}
+      onDateChange={onDateChange}
+      dots={dots}
+    />
+  ));
 }
 
 function Week({week = [], date, onDateChange, dots = []}) {
