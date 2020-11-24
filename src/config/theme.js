@@ -61,7 +61,7 @@ export const theme = {
     },
     today: {
       backgroundColor: colors.white,
-      text: colors.red,
+      text: colors.blue,
     },
     selectedDay: {
       backgroundColor: colors.blue,
