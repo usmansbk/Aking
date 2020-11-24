@@ -60,8 +60,8 @@ export const theme = {
       inactiveTintColor: colors.gray4,
     },
     today: {
-      backgroundColor: colors.green,
-      text: colors.black,
+      backgroundColor: colors.white,
+      text: colors.red,
     },
     selectedDay: {
       backgroundColor: colors.blue,

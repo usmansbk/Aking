@@ -254,11 +254,7 @@ function Day({day, isCurrentDate, onPress, dot}) {
         variant="sectionHeader"
         color={day.sameMonth ? 'main' : 'sectionHeader'}
         style={{
-          color: isCurrentDate
-            ? colors.text
-            : day.sameMonth
-            ? theme.palatte.text.main
-            : theme.palatte.text.sectionHeader,
+          color: day.sameMonth ? colors.text : theme.palatte.text.sectionHeader,
         }}>
         {formatDay(day.date)}
       </Text>
