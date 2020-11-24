@@ -14,11 +14,12 @@ import Icon from '../Icon';
 import {useTheme} from '@config/theme';
 import {
   formatMonth,
-  getWeekDates,
   formatDay,
   isSameDay,
-  getDate,
   isDateMarked,
+  getDate,
+  getRowIndex,
+  getWeekDates,
 } from './utils';
 
 const {height} = Dimensions.get('window');
@@ -120,11 +121,20 @@ class Calendar extends React.Component {
           ]}
           {...this.panResponder.panHandlers}>
           <ScrollView scrollEnabled={false}>
-            <Weeks
-              dots={markedDates}
-              date={date}
-              onDateChange={(newDate) => this.setState({date: newDate})}
-            />
+            <Animated.View
+              style={{
+                top: this.anim.interpolate({
+                  inputRange: [MIN_CALENDAR_HEIGHT, MAX_CALENDAR_HEIGHT],
+                  outputRange: [-MIN_CALENDAR_HEIGHT * getRowIndex(date), 0],
+                  extrapolate: 'clamp',
+                }),
+              }}>
+              <Weeks
+                dots={markedDates}
+                date={date}
+                onDateChange={(newDate) => this.setState({date: newDate})}
+              />
+            </Animated.View>
           </ScrollView>
         </Animated.View>
       </View>

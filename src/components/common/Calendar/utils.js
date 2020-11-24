@@ -58,3 +58,7 @@ export function getWeekDates(date) {
 
   return calendar;
 }
+
+export function getRowIndex(date) {
+  return 3;
+}
