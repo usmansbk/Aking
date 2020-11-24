@@ -76,7 +76,9 @@ class Calendar extends React.Component {
     },
     onPanResponderMove: (_, gestureState) => {
       const {dy} = gestureState;
-      this.anim.setValue(dy);
+      if (Math.abs(dy) > 8) {
+        this.anim.setValue(dy + 8);
+      }
     },
     onPanResponderRelease: (_, gestureState) => {
       this.anim.flattenOffset();
