@@ -34,11 +34,11 @@ export function isDateMarked(dates = [], date) {
 
 const NUMBER_DAYS_IN_WEEK = 7;
 const WEEKS_PER_PAGE = 6;
+const TOTAL_DAYS_PER_PAGE = WEEKS_PER_PAGE * WEEKS_PER_PAGE;
 // This function returns a [7 x 6] grid representation
 // of a month calendar
-export function getWeekDates(date, numberOfWeeks = WEEKS_PER_PAGE) {
+export function getWeekDates(date) {
   const momentDate = moment(date);
-  const TOTAL_DAYS_PER_PAGE = numberOfWeeks * WEEKS_PER_PAGE;
 
   const calendar = [];
 
