@@ -120,7 +120,6 @@ class Calendar extends React.Component {
           ]}
           {...this.panResponder.panHandlers}>
           <Weeks
-            anim={this.anim}
             dots={markedDates}
             date={date}
             onDateChange={(newDate) => this.setState({date: newDate})}
@@ -131,7 +130,7 @@ class Calendar extends React.Component {
   }
 }
 
-function MonthHeader({onPress, date = new Date(), expanded}) {
+function MonthHeader({onPress, date = new Date()}) {
   const theme = useTheme();
   return (
     <TouchableOpacity
@@ -140,7 +139,7 @@ function MonthHeader({onPress, date = new Date(), expanded}) {
       <Text variant="sectionHeader" style={{marginRight: theme.spacing.s}}>
         {formatMonth(date)}
       </Text>
-      <Icon name={expanded ? 'chevron-up' : 'chevron-down'} size={14} />
+      <Icon name={'chevron-up'} size={14} />
     </TouchableOpacity>
   );
 }
