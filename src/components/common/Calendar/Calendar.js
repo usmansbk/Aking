@@ -74,6 +74,7 @@ class Calendar extends React.Component {
       this.anim.setValue(gestureState.dy);
     },
     onPanResponderRelease: (_, gestureState) => {
+      this.anim.flattenOffset();
       Animated.spring(this.anim, {
         toValue:
           gestureState.dy >= MIN_CALENDAR_HEIGHT
@@ -82,7 +83,6 @@ class Calendar extends React.Component {
         useNativeDriver: false,
         bounciness: 0,
       }).start();
-      this.anim.flattenOffset();
     },
   });
 
@@ -114,7 +114,7 @@ class Calendar extends React.Component {
             {
               height: this.anim.interpolate({
                 inputRange: [MIN_CALENDAR_HEIGHT, MAX_CALENDAR_HEIGHT],
-                outputRange: [MIN_CALENDAR_HEIGHT, MIN_CALENDAR_HEIGHT * 8],
+                outputRange: [MIN_CALENDAR_HEIGHT, MAX_CALENDAR_HEIGHT],
                 extrapolate: 'clamp',
               }),
             },

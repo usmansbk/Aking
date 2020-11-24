@@ -82,6 +82,7 @@ export default function Item({title, time, completed}) {
         }
       },
       onPanResponderRelease: (_, gestureState) => {
+        slideX.flattenOffset();
         const {dx} = gestureState;
         if (SHIFT < dx) {
           Animated.spring(slideX, {
@@ -89,7 +90,6 @@ export default function Item({title, time, completed}) {
             useNativeDriver: false,
           }).start();
         }
-        slideX.flattenOffset();
       },
     }),
   ).current;
