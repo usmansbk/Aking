@@ -5,9 +5,11 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   TouchableNativeFeedback,
+  FlatList,
 } from 'react-native';
 import {Text} from '@components/common';
 import {useTheme} from '@config/theme';
+import {useNavigation} from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,6 +37,25 @@ const styles = StyleSheet.create({
 
 export default function ActionModal({visible, onRequestClose}) {
   const theme = useTheme();
+  const navigation = useNavigation();
+
+  const actions = [
+    {
+      id: '1',
+      label: 'Add Task',
+      onPress: () => navigation.navigate('NewTask'),
+    },
+    {
+      id: '2',
+      label: 'Add Quick Note',
+      onPress: () => console.log('add quick note'),
+    },
+    {
+      id: '3',
+      label: 'Add Check List',
+      onPress: () => console.log('add check list'),
+    },
+  ];
 
   return (
     <Modal
@@ -54,11 +75,21 @@ export default function ActionModal({visible, onRequestClose}) {
                   elevation: theme.shape.elevation,
                 },
               ]}>
-              <Button>Add Task</Button>
-              <Divider />
-              <Button>Add Quick Note</Button>
-              <Divider />
-              <Button>Add Check List</Button>
+              <FlatList
+                data={actions}
+                renderItem={({item: {onPress, label}}) => {
+                  return (
+                    <Button
+                      onPress={() => {
+                        onRequestClose();
+                        onPress();
+                      }}>
+                      {label}
+                    </Button>
+                  );
+                }}
+                ItemSeparatorComponent={Divider}
+              />
             </View>
           </TouchableWithoutFeedback>
         </View>
