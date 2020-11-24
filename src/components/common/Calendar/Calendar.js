@@ -24,8 +24,8 @@ import {
 const {height} = Dimensions.get('window');
 
 const DAY_SIZE = 48;
-const MAX_CALENDAR_HEIGHT = height * 0.38;
-const MIN_CALENDAR_HEIGHT = MAX_CALENDAR_HEIGHT / 8;
+const MAX_CALENDAR_HEIGHT = height * 0.38 + 8;
+const MIN_CALENDAR_HEIGHT = MAX_CALENDAR_HEIGHT / 8 + 16;
 
 const styles = StyleSheet.create({
   monthHeader: {
@@ -102,7 +102,7 @@ class Calendar extends React.Component {
           {
             backgroundColor: theme.palatte.background.main,
             elevation: theme.shape.elevation,
-            paddingBottom: theme.spacing.l,
+            paddingBottom: theme.spacing.s,
           },
         ]}>
         <MonthHeader date={date} />
