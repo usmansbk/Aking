@@ -53,6 +53,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Medium',
     fontSize: 16,
   },
+  picker: {
+    fontFamily: 'Demi',
+    fontSize: 14,
+  },
 });
 
 export default function AkingText({

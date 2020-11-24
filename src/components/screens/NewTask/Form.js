@@ -3,6 +3,7 @@ import {ScrollView, View} from 'react-native';
 import {Button, Text, FAB} from '@components/common';
 import {useTheme} from '@config/theme';
 import TextInput, {TextField} from './TextInput';
+import DatePicker from './DatePicker';
 
 export default function NewTaskForm() {
   const theme = useTheme();
@@ -17,6 +18,9 @@ export default function NewTaskForm() {
           padding: theme.spacing.l,
         }}>
         <TextField label="Description" />
+      </View>
+      <View style={{paddingVertical: theme.spacing.m}}>
+        <DatePicker label="Due Date" />
       </View>
       <View
         style={{
