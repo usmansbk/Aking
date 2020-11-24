@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   PanResponder,
   Animated,
+  Dimensions,
 } from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import Text from '../Text';
@@ -21,8 +22,12 @@ import {
   previousMonth,
 } from './utils';
 
+const {height} = Dimensions.get('window');
+
 const DAY_SIZE = 48;
 const MINIMUM_DRAG = 10;
+const MAX_CALENDAR_HEIGHT = height * 0.38;
+const MIN_CALENDAR_HEIGHT = MAX_CALENDAR_HEIGHT / 8;
 
 const styles = StyleSheet.create({
   monthHeader: {
@@ -34,7 +39,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-  weeks: {},
+  weeks: {
+    // height: MAX_CALENDAR_HEIGHT,
+  },
   weekRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -43,7 +50,6 @@ const styles = StyleSheet.create({
     width: DAY_SIZE,
     height: DAY_SIZE,
     borderRadius: DAY_SIZE / 2,
-    backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -61,16 +67,36 @@ export default function CalendarHOC(props) {
 // PanResponder in Functional component doesn't allow us to manipulate useState
 // so we switch to Class component
 class Calendar extends React.Component {
+  anim = new Animated.Value(0);
   panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
     onPanResponderTerminationRequest: () => false,
+    onPanResponderGrant: () => {
+      this.anim.setOffset(this.anim._value);
+    },
+    onPanResponderMove: (_, gestureState) => {
+      this.anim.setValue(gestureState.dy);
+    },
     onPanResponderRelease: (_, gestureState) => {
-      if (gestureState.dx > MINIMUM_DRAG) {
-        this.setState({date: previousMonth(this.state.date)});
-      } else if (gestureState.dx < -MINIMUM_DRAG) {
-        this.setState({date: nextMonth(this.state.date)});
+      // if (gestureState.dx > MINIMUM_DRAG) {
+      //   this.setState({date: previousMonth(this.state.date)});
+      // } else if (gestureState.dx < -MINIMUM_DRAG) {
+      //   this.setState({date: nextMonth(this.state.date)});
+      // }
+      console.log(gestureState.dy);
+      if (gestureState.dy > MIN_CALENDAR_HEIGHT) {
+        Animated.spring(this.anim, {
+          toValue: MAX_CALENDAR_HEIGHT,
+          useNativeDriver: false,
+        }).start();
+      } else {
+        Animated.spring(this.anim, {
+          toValue: MIN_CALENDAR_HEIGHT,
+          useNativeDriver: false,
+        }).start();
       }
+      this.anim.flattenOffset();
     },
   });
 
@@ -78,12 +104,13 @@ class Calendar extends React.Component {
     super(props);
     this.state = {
       date: getDate(),
+      expanded: true,
     };
   }
 
   render() {
-    const {theme, dots} = this.props;
-    const {date} = this.state;
+    const {theme, markedDates} = this.props;
+    const {date, expanded} = this.state;
     return (
       <View
         style={[
@@ -95,18 +122,31 @@ class Calendar extends React.Component {
         ]}>
         <MonthHeader date={date} />
         <WeekHeader />
-        <Animated.View style={styles.weeks} {...this.panResponder.panHandlers}>
+        <Animated.View
+          style={[
+            styles.weeks,
+            {
+              height: this.anim.interpolate({
+                inputRange: [MIN_CALENDAR_HEIGHT, MAX_CALENDAR_HEIGHT],
+                outputRange: [MIN_CALENDAR_HEIGHT, MIN_CALENDAR_HEIGHT * 8],
+                extrapolate: 'clamp',
+              }),
+            },
+          ]}
+          {...this.panResponder.panHandlers}>
           <Weeks
-            dots={dots}
+            dots={markedDates}
             date={date}
             onDateChange={(newDate) => this.setState({date: newDate})}
+            expanded={expanded}
+            currentIndex={this.anim._value}
           />
         </Animated.View>
       </View>
     );
   }
 }
-
+//expanded ? 8 * MIN_CALENDAR_HEIGHT : MIN_CALENDAR_HEIGHT
 function MonthHeader({onPress, date = new Date(), expanded}) {
   const theme = useTheme();
   return (
@@ -122,23 +162,23 @@ function MonthHeader({onPress, date = new Date(), expanded}) {
 }
 
 function WeekHeader() {
-  const theme = useTheme();
-
   return (
-    <View style={[styles.weekHeader, {paddingBottom: theme.spacing.m}]}>
+    <View style={styles.weekHeader}>
       {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, index, array) => (
-        <Text
-          key={index}
-          variant="sectionHeader"
-          color={index === array.length - 1 ? 'primary' : 'sectionHeader'}>
-          {day}
-        </Text>
+        <View style={styles.day} key={index}>
+          <Text
+            variant="sectionHeader"
+            color={index === array.length - 1 ? 'primary' : 'sectionHeader'}>
+            {day}
+          </Text>
+        </View>
       ))}
     </View>
   );
 }
 
-function Weeks({date, onDateChange = () => null, dots = []}) {
+function Weeks({date, onDateChange = () => null, dots = [], currentIndex}) {
+  console.log(MAX_CALENDAR_HEIGHT / currentIndex);
   const weeks = getWeekDates(date);
   return (
     <View>
