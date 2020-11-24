@@ -6,7 +6,6 @@ import {
   PanResponder,
   Animated,
   Dimensions,
-  ScrollView,
 } from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import Text from '../Text';
@@ -20,8 +19,8 @@ import {
   getDate,
   getRowIndex,
   getWeekDates,
-  nextMonth,
-  previousMonth,
+  // nextMonth,
+  // previousMonth,
 } from './utils';
 
 const {height} = Dimensions.get('window');
@@ -29,7 +28,7 @@ const {height} = Dimensions.get('window');
 const DAY_SIZE = 48;
 const MAX_CALENDAR_HEIGHT = height * 0.38 + 8;
 const MIN_CALENDAR_HEIGHT = MAX_CALENDAR_HEIGHT / 8 + 12;
-const MIN_SWIPE_HORIZONTAL = 16;
+// const MIN_SWIPE_HORIZONTAL = 16;
 const MIN_DRAG_VERTICAL = 8;
 
 const styles = StyleSheet.create({
@@ -85,25 +84,24 @@ class Calendar extends React.Component {
     onPanResponderRelease: (_, gestureState) => {
       this.anim.flattenOffset();
       if (Math.abs(gestureState.dy) > Math.abs(gestureState.dx)) {
-        if (Math.abs(gestureState.dy) > MIN_DRAG_VERTICAL) {
-          Animated.spring(this.anim, {
-            toValue:
-              gestureState.dy > 0 ? MAX_CALENDAR_HEIGHT : MIN_CALENDAR_HEIGHT,
-            useNativeDriver: false,
-            bounciness: 0,
-          }).start();
-        }
-      } else if (Math.abs(gestureState.dx) > MIN_SWIPE_HORIZONTAL) {
-        if (gestureState.dx > 0) {
-          this.setState({
-            date: previousMonth(this.state.date),
-          });
-        } else {
-          this.setState({
-            date: nextMonth(this.state.date),
-          });
-        }
+        Animated.spring(this.anim, {
+          toValue:
+            gestureState.dy > 0 ? MAX_CALENDAR_HEIGHT : MIN_CALENDAR_HEIGHT,
+          useNativeDriver: false,
+          bounciness: 0,
+        }).start();
       }
+      // else if (Math.abs(gestureState.dx) > MIN_SWIPE_HORIZONTAL) {
+      //   if (gestureState.dx > 0) {
+      //     this.setState({
+      //       date: previousMonth(this.state.date),
+      //     });
+      //   } else {
+      //     this.setState({
+      //       date: nextMonth(this.state.date),
+      //     });
+      //   }
+      // }
     },
   });
 
@@ -147,35 +145,31 @@ class Calendar extends React.Component {
           })}
         />
         <WeekHeader />
-        <Animated.View
-          style={[
-            styles.weeks,
-            {
-              height: this.anim.interpolate({
+        <Animated.ScrollView
+          scrollEnabled={false}
+          {...this.panResponder.panHandlers}
+          style={{
+            height: this.anim.interpolate({
+              inputRange: [MIN_CALENDAR_HEIGHT, MAX_CALENDAR_HEIGHT],
+              outputRange: [MIN_CALENDAR_HEIGHT, MAX_CALENDAR_HEIGHT],
+              extrapolate: 'clamp',
+            }),
+          }}>
+          <Animated.View
+            style={{
+              top: this.anim.interpolate({
                 inputRange: [MIN_CALENDAR_HEIGHT, MAX_CALENDAR_HEIGHT],
-                outputRange: [MIN_CALENDAR_HEIGHT, MAX_CALENDAR_HEIGHT],
+                outputRange: [-MIN_CALENDAR_HEIGHT * getRowIndex(date), 0],
                 extrapolate: 'clamp',
               }),
-            },
-          ]}
-          {...this.panResponder.panHandlers}>
-          <ScrollView scrollEnabled={false}>
-            <Animated.View
-              style={{
-                top: this.anim.interpolate({
-                  inputRange: [MIN_CALENDAR_HEIGHT, MAX_CALENDAR_HEIGHT],
-                  outputRange: [-MIN_CALENDAR_HEIGHT * getRowIndex(date), 0],
-                  extrapolate: 'clamp',
-                }),
-              }}>
-              <Weeks
-                dots={markedDates}
-                date={date}
-                onDateChange={(newDate) => this.setState({date: newDate})}
-              />
-            </Animated.View>
-          </ScrollView>
-        </Animated.View>
+            }}>
+            <Weeks
+              dots={markedDates}
+              date={date}
+              onDateChange={(newDate) => this.setState({date: newDate})}
+            />
+          </Animated.View>
+        </Animated.ScrollView>
       </View>
     );
   }
