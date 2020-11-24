@@ -18,14 +18,11 @@ import {
   isSameDay,
   getDate,
   isDateMarked,
-  // nextMonth,
-  // previousMonth,
 } from './utils';
 
 const {height, width} = Dimensions.get('window');
 
 const DAY_SIZE = 48;
-// const MINIMUM_DRAG = 10;
 const MAX_CALENDAR_HEIGHT = height * 0.38;
 const MIN_CALENDAR_HEIGHT = MAX_CALENDAR_HEIGHT / 8;
 
@@ -39,9 +36,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-  weeks: {
-    // height: MAX_CALENDAR_HEIGHT,
-  },
+  weeks: {},
   weekRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -87,11 +82,6 @@ class Calendar extends React.Component {
       this.currentHeight.setValue(gestureState.moveY);
     },
     onPanResponderRelease: (_, gestureState) => {
-      // if (gestureState.dx > MINIMUM_DRAG) {
-      //   this.setState({date: previousMonth(this.state.date)});
-      // } else if (gestureState.dx < -MINIMUM_DRAG) {
-      //   this.setState({date: nextMonth(this.state.date)});
-      // }
       if (gestureState.dy > MIN_CALENDAR_HEIGHT) {
         Animated.spring(this.anim, {
           toValue: MAX_CALENDAR_HEIGHT,
@@ -142,6 +132,7 @@ class Calendar extends React.Component {
           ]}
           {...this.panResponder.panHandlers}>
           <Weeks
+            anim={this.anim}
             dots={markedDates}
             date={date}
             onDateChange={(newDate) => this.setState({date: newDate})}
@@ -151,7 +142,7 @@ class Calendar extends React.Component {
     );
   }
 }
-//expanded ? 8 * MIN_CALENDAR_HEIGHT : MIN_CALENDAR_HEIGHT
+
 function MonthHeader({onPress, date = new Date(), expanded}) {
   const theme = useTheme();
   return (
@@ -185,7 +176,7 @@ function WeekHeader() {
 function Weeks({date, onDateChange = () => null, dots = [], strip}) {
   const weeks = getWeekDates(date, strip ? 1 : 6);
   return (
-    <View>
+    <>
       {weeks.map((week, index) => (
         <Week
           key={index}
@@ -195,7 +186,7 @@ function Weeks({date, onDateChange = () => null, dots = [], strip}) {
           dots={dots}
         />
       ))}
-    </View>
+    </>
   );
 }
 
