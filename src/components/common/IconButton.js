@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function IconButton({name, size = 48, onPress}) {
+export default function IconButton({name, size = 48, onPress, color}) {
   const theme = useTheme();
   return (
     <TouchableOpacity
@@ -24,7 +24,7 @@ export default function IconButton({name, size = 48, onPress}) {
         },
       ]}
       onPress={onPress}>
-      <Icon name={name} size={size / 2} />
+      <Icon name={name} size={size / 2} color={color} />
     </TouchableOpacity>
   );
 }

@@ -27,6 +27,7 @@ export default function Header({
   onPressLeftIcon,
   backgroundColor,
   barStyle,
+  iconColor,
 }) {
   const theme = useTheme();
   return (
@@ -46,7 +47,12 @@ export default function Header({
         ]}>
         <View style={styles.icon}>
           {!!onPressLeftIcon && (
-            <IconButton name={leftIcon} onPress={onPressLeftIcon} />
+            <IconButton
+              name={leftIcon}
+              onPress={onPressLeftIcon}
+              color={iconColor}
+              fillColor={iconColor}
+            />
           )}
         </View>
         <View style={styles.title}>

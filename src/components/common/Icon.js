@@ -15,7 +15,7 @@ import ChevronDown from '@assets/svgs/ChevronDown.svg';
 import Dot from '@assets/svgs/Dot.svg';
 import {useTheme} from '@config/theme';
 
-export default function Icon({size = 24, color, name}) {
+export default function Icon({size = 24, color, name, fillColor}) {
   const theme = useTheme();
 
   let Component = null;
@@ -72,7 +72,7 @@ export default function Icon({size = 24, color, name}) {
       width={size}
       height={size}
       fill={color || theme.colors.black}
-      fillSecondary={theme.palatte.background.main}
+      fillSecondary={fillColor || theme.palatte.background.main}
     />
   );
 }
