@@ -45,6 +45,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Demi',
     fontSize: 17,
   },
+  modalButton: {
+    fontFamily: 'Demi',
+    fontSize: 18,
+  },
 });
 
 export default function AkingText({

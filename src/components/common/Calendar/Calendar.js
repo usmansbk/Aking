@@ -19,8 +19,6 @@ import {
   getDate,
   getRowIndex,
   getWeekDates,
-  // nextMonth,
-  // previousMonth,
 } from './utils';
 
 const {height} = Dimensions.get('window');
@@ -83,25 +81,12 @@ class Calendar extends React.Component {
     },
     onPanResponderRelease: (_, gestureState) => {
       this.anim.flattenOffset();
-      if (Math.abs(gestureState.dy) > Math.abs(gestureState.dx)) {
-        Animated.spring(this.anim, {
-          toValue:
-            gestureState.dy > 0 ? MAX_CALENDAR_HEIGHT : MIN_CALENDAR_HEIGHT,
-          useNativeDriver: false,
-          bounciness: 0,
-        }).start();
-      }
-      // else if (Math.abs(gestureState.dx) > MIN_SWIPE_HORIZONTAL) {
-      //   if (gestureState.dx > 0) {
-      //     this.setState({
-      //       date: previousMonth(this.state.date),
-      //     });
-      //   } else {
-      //     this.setState({
-      //       date: nextMonth(this.state.date),
-      //     });
-      //   }
-      // }
+      Animated.spring(this.anim, {
+        toValue:
+          gestureState.dy > 0 ? MAX_CALENDAR_HEIGHT : MIN_CALENDAR_HEIGHT,
+        useNativeDriver: false,
+        bounciness: 0,
+      }).start();
     },
   });
 
@@ -160,6 +145,7 @@ class Calendar extends React.Component {
         <WeekHeader />
         <Animated.ScrollView
           scrollEnabled={false}
+          directionalLockEnabled
           {...this.panResponder.panHandlers}
           style={{
             height: this.anim.interpolate({
