@@ -35,27 +35,27 @@ const styles = StyleSheet.create({
   },
 });
 
+const actions = [
+  {
+    id: '1',
+    label: 'Add Task',
+    route: 'NewTask',
+  },
+  {
+    id: '2',
+    label: 'Add Quick Note',
+    route: 'NewQuickNote',
+  },
+  {
+    id: '3',
+    label: 'Add Check List',
+    route: 'NewCheckList',
+  },
+];
+
 export default function ActionModal({visible, onRequestClose}) {
   const theme = useTheme();
   const navigation = useNavigation();
-
-  const actions = [
-    {
-      id: '1',
-      label: 'Add Task',
-      onPress: () => navigation.navigate('NewTask'),
-    },
-    {
-      id: '2',
-      label: 'Add Quick Note',
-      onPress: () => console.log('add quick note'),
-    },
-    {
-      id: '3',
-      label: 'Add Check List',
-      onPress: () => console.log('add check list'),
-    },
-  ];
 
   return (
     <Modal
@@ -77,12 +77,12 @@ export default function ActionModal({visible, onRequestClose}) {
               ]}>
               <FlatList
                 data={actions}
-                renderItem={({item: {onPress, label}}) => {
+                renderItem={({item: {route, label}}) => {
                   return (
                     <Button
                       onPress={() => {
                         onRequestClose();
-                        onPress();
+                        navigation.navigate(route);
                       }}>
                       {label}
                     </Button>
