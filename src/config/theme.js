@@ -17,6 +17,7 @@ const colors = {
   gray5: '#F9F9F9',
   gray6: '#9A9A9A',
   gray7: '#9E9E9E',
+  gray8: '#F4F4F4',
   backdrop: '#313131',
   iconBlack: '#1E201D',
 };
@@ -54,6 +55,7 @@ export const theme = {
     textInput: {
       underlineColor: colors.gray2,
       placeholderColor: colors.gray3,
+      background: colors.gray8,
     },
     tabBar: {
       activeTintColor: colors.white,
