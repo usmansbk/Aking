@@ -6,6 +6,7 @@ import {
   PanResponder,
   Animated,
   Dimensions,
+  ScrollView,
 } from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import Text from '../Text';
@@ -20,7 +21,7 @@ import {
   isDateMarked,
 } from './utils';
 
-const {height, width} = Dimensions.get('window');
+const {height} = Dimensions.get('window');
 
 const DAY_SIZE = 48;
 const MAX_CALENDAR_HEIGHT = height * 0.38;
@@ -51,12 +52,6 @@ const styles = StyleSheet.create({
   dot: {
     position: 'absolute',
     bottom: 4,
-  },
-  calendar: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    width,
   },
 });
 
@@ -170,7 +165,7 @@ function WeekHeader() {
 function Weeks({date, onDateChange = () => null, dots = [], strip}) {
   const weeks = getWeekDates(date, strip ? 1 : 6);
   return (
-    <>
+    <ScrollView scrollEnabled={false}>
       {weeks.map((week, index) => (
         <Week
           key={index}
@@ -180,7 +175,7 @@ function Weeks({date, onDateChange = () => null, dots = [], strip}) {
           dots={dots}
         />
       ))}
-    </>
+    </ScrollView>
   );
 }
 
