@@ -69,17 +69,15 @@ export default function CalendarHOC(props) {
 // so we switch to Class component
 class Calendar extends React.Component {
   anim = new Animated.Value(0);
-  currentHeight = new Animated.Value(0);
   panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
-    onPanResponderTerminationRequest: () => false,
+    onPanResponderTerminationRequest: () => true,
     onPanResponderGrant: () => {
       this.anim.setOffset(this.anim._value);
     },
     onPanResponderMove: (_, gestureState) => {
       this.anim.setValue(gestureState.dy);
-      this.currentHeight.setValue(gestureState.moveY);
     },
     onPanResponderRelease: (_, gestureState) => {
       if (gestureState.dy > MIN_CALENDAR_HEIGHT) {
