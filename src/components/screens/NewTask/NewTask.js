@@ -1,7 +1,8 @@
 import React from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
-import {Text, Header, Footer} from '@components/common';
+import {Header, Footer} from '@components/common';
 import {useTheme} from '@config/theme';
+import Form from './Form';
 
 const {height} = Dimensions.get('window');
 
@@ -53,7 +54,7 @@ export default function NewTask({navigation}) {
               top: theme.spacing.space(-10),
             },
           ]}>
-          <Text>Modal</Text>
+          <Form />
         </View>
       </View>
       <Footer />
