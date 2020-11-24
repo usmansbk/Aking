@@ -59,6 +59,10 @@ export function getWeekDates(date) {
   return calendar;
 }
 
+// Calculate which row current date falls in
 export function getRowIndex(date) {
-  return 3;
+  const momentDate = moment(date);
+  const startOfWeek = momentDate.clone().date(1).startOf('week');
+
+  return Math.floor(momentDate.diff(startOfWeek, 'day') / 7);
 }
