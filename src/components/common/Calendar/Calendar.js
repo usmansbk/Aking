@@ -71,7 +71,7 @@ class Calendar extends React.Component {
   panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
-    onPanResponderTerminationRequest: () => true,
+    onPanResponderTerminationRequest: () => false,
     onPanResponderGrant: () => {
       this.anim.setOffset(this.anim._value);
     },
@@ -114,6 +114,19 @@ class Calendar extends React.Component {
       useNativeDriver: false,
       bounciness: 0,
     }).start();
+  };
+
+  _minimize = () => {
+    Animated.timing(this.anim, {
+      toValue: MIN_CALENDAR_HEIGHT,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  _onDateChange = (newDate) => {
+    this.setState({date: newDate}, () => {
+      this._minimize();
+    });
   };
 
   constructor(props) {
@@ -166,7 +179,7 @@ class Calendar extends React.Component {
             <Weeks
               dots={markedDates}
               date={date}
-              onDateChange={(newDate) => this.setState({date: newDate})}
+              onDateChange={this._onDateChange}
             />
           </Animated.View>
         </Animated.ScrollView>
