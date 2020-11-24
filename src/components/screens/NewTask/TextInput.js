@@ -15,6 +15,14 @@ const styles = StyleSheet.create({
   fieldFooter: {
     borderTopWidth: 1,
   },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  rounded: {
+    fontFamily: 'Medium',
+    fontSize: 14,
+  },
 });
 
 export default function Input({placeholder, ...textInputProps}) {
@@ -67,6 +75,29 @@ export function TextField({label, ...textInputProps}) {
           <IconButton name="clip" color={theme.colors.gray7} />
         </View>
       </View>
+    </View>
+  );
+}
+
+export function RoundedInput({label, placeholder}) {
+  const theme = useTheme();
+  return (
+    <View style={[styles.row]}>
+      <Text variant="label">{label}</Text>
+      <TextInput
+        placeholder={placeholder}
+        style={[
+          styles.rounded,
+          styles.textInput,
+          {
+            height: theme.spacing.space(6),
+            backgroundColor: theme.palatte.textInput.background,
+            marginHorizontal: theme.spacing.l,
+            borderRadius: theme.spacing.xl,
+            paddingHorizontal: theme.spacing.l,
+          },
+        ]}
+      />
     </View>
   );
 }
