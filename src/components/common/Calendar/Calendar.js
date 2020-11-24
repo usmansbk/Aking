@@ -22,7 +22,7 @@ import {
   previousMonth,
 } from './utils';
 
-const {height} = Dimensions.get('window');
+const {height, width} = Dimensions.get('window');
 
 const DAY_SIZE = 48;
 const MINIMUM_DRAG = 10;
@@ -57,6 +57,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 4,
   },
+  calendar: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width,
+  },
 });
 
 export default function CalendarHOC(props) {
@@ -68,6 +74,7 @@ export default function CalendarHOC(props) {
 // so we switch to Class component
 class Calendar extends React.Component {
   anim = new Animated.Value(0);
+  currentHeight = new Animated.Value(0);
   panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
@@ -77,6 +84,7 @@ class Calendar extends React.Component {
     },
     onPanResponderMove: (_, gestureState) => {
       this.anim.setValue(gestureState.dy);
+      this.currentHeight.setValue(gestureState.moveY);
     },
     onPanResponderRelease: (_, gestureState) => {
       // if (gestureState.dx > MINIMUM_DRAG) {
@@ -84,7 +92,6 @@ class Calendar extends React.Component {
       // } else if (gestureState.dx < -MINIMUM_DRAG) {
       //   this.setState({date: nextMonth(this.state.date)});
       // }
-      console.log(gestureState.dy);
       if (gestureState.dy > MIN_CALENDAR_HEIGHT) {
         Animated.spring(this.anim, {
           toValue: MAX_CALENDAR_HEIGHT,
@@ -110,7 +117,7 @@ class Calendar extends React.Component {
 
   render() {
     const {theme, markedDates} = this.props;
-    const {date, expanded} = this.state;
+    const {date} = this.state;
     return (
       <View
         style={[
@@ -138,8 +145,6 @@ class Calendar extends React.Component {
             dots={markedDates}
             date={date}
             onDateChange={(newDate) => this.setState({date: newDate})}
-            expanded={expanded}
-            currentIndex={this.anim._value}
           />
         </Animated.View>
       </View>
@@ -177,9 +182,8 @@ function WeekHeader() {
   );
 }
 
-function Weeks({date, onDateChange = () => null, dots = [], currentIndex}) {
-  console.log(MAX_CALENDAR_HEIGHT / currentIndex);
-  const weeks = getWeekDates(date);
+function Weeks({date, onDateChange = () => null, dots = [], strip}) {
+  const weeks = getWeekDates(date, strip ? 1 : 6);
   return (
     <View>
       {weeks.map((week, index) => (

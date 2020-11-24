@@ -38,7 +38,7 @@ const WEEKS_PER_PAGE = 6;
 // of a month calendar
 export function getWeekDates(date, numberOfWeeks = WEEKS_PER_PAGE) {
   const momentDate = moment(date);
-  const TOTAL_DAYS_PER_PAGE = NUMBER_DAYS_IN_WEEK * WEEKS_PER_PAGE;
+  const TOTAL_DAYS_PER_PAGE = numberOfWeeks * WEEKS_PER_PAGE;
 
   const calendar = [];
 
