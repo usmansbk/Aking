@@ -1,8 +1,9 @@
 // https://reactnavigation.org/docs/bottom-tab-navigator/
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback, useState} from 'react';
 import {TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import {Text, Icon, FAB} from '@components/common';
+import Modal from './Modal';
 import {useTheme} from '@config/theme';
 
 const BUTTON_SIZE = 48;
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
 
 export default function AkingTabBar({state, descriptors, navigation}) {
   const theme = useTheme();
+  const [visible, setModalVisible] = useState(false);
   const focusedOptions = descriptors[state.routes[state.index].key].options;
 
   useEffect(() => {
@@ -43,43 +45,49 @@ export default function AkingTabBar({state, descriptors, navigation}) {
   const routes = state.routes;
 
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: theme.palatte.secondary.dark,
-          paddingVertical: theme.spacing.xs,
-          paddingHorizontal: theme.spacing.m,
-        },
-      ]}>
-      <TabButton
-        navigation={navigation}
-        route={routes[0]}
-        isFocused={state.index === 0}
-        descriptors={descriptors}
-      />
-      <TabButton
-        navigation={navigation}
-        route={routes[1]}
-        isFocused={state.index === 1}
-        descriptors={descriptors}
-      />
-      <View style={styles.fabContainer}>
-        <FAB style={[styles.fab, {marginTop: theme.spacing.space(-2)}]} />
+    <>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: theme.palatte.secondary.dark,
+            paddingVertical: theme.spacing.xs,
+            paddingHorizontal: theme.spacing.m,
+          },
+        ]}>
+        <TabButton
+          navigation={navigation}
+          route={routes[0]}
+          isFocused={state.index === 0}
+          descriptors={descriptors}
+        />
+        <TabButton
+          navigation={navigation}
+          route={routes[1]}
+          isFocused={state.index === 1}
+          descriptors={descriptors}
+        />
+        <View style={styles.fabContainer}>
+          <FAB
+            style={[styles.fab, {marginTop: theme.spacing.space(-2)}]}
+            onPress={() => setModalVisible(true)}
+          />
+        </View>
+        <TabButton
+          navigation={navigation}
+          route={routes[2]}
+          isFocused={state.index === 2}
+          descriptors={descriptors}
+        />
+        <TabButton
+          navigation={navigation}
+          route={routes[3]}
+          isFocused={state.index === 3}
+          descriptors={descriptors}
+        />
       </View>
-      <TabButton
-        navigation={navigation}
-        route={routes[2]}
-        isFocused={state.index === 2}
-        descriptors={descriptors}
-      />
-      <TabButton
-        navigation={navigation}
-        route={routes[3]}
-        isFocused={state.index === 3}
-        descriptors={descriptors}
-      />
-    </View>
+      <Modal visible={visible} onRequestClose={() => setModalVisible(false)} />
+    </>
   );
 }
 
