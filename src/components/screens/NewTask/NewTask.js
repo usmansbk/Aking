@@ -28,9 +28,10 @@ export default function NewTask({navigation}) {
         iconColor={theme.palatte.background.main}
         expand
       />
-      <View style={styles.footer}>
-        <Footer />
+      <View style={styles.content}>
+        <Text>Content</Text>
       </View>
+      <Footer />
     </View>
   );
 }
