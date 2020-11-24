@@ -19,6 +19,7 @@ import {
   getDate,
   getRowIndex,
   getWeekDates,
+  dateString,
 } from './utils';
 
 const {height} = Dimensions.get('window');
@@ -213,7 +214,11 @@ function WeekHeader() {
   );
 }
 
-function Weeks({date, onDateChange = () => null, dots = []}) {
+function Weeks({
+  date,
+  onDateChange = () => null,
+  dots = [dateString(1), dateString(3), dateString(8)],
+}) {
   const weeks = getWeekDates(date);
   return weeks.map((week, index) => (
     <Week
