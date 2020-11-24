@@ -80,17 +80,13 @@ class Calendar extends React.Component {
       this.anim.setValue(gestureState.dy);
     },
     onPanResponderRelease: (_, gestureState) => {
-      if (gestureState.dy > MIN_CALENDAR_HEIGHT) {
-        Animated.spring(this.anim, {
-          toValue: MAX_CALENDAR_HEIGHT,
-          useNativeDriver: false,
-        }).start();
-      } else {
-        Animated.spring(this.anim, {
-          toValue: MIN_CALENDAR_HEIGHT,
-          useNativeDriver: false,
-        }).start();
-      }
+      Animated.spring(this.anim, {
+        toValue:
+          gestureState.dy > MIN_CALENDAR_HEIGHT
+            ? MAX_CALENDAR_HEIGHT
+            : MIN_CALENDAR_HEIGHT,
+        useNativeDriver: false,
+      }).start();
       this.anim.flattenOffset();
     },
   });
