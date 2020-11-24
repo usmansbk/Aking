@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-  weeks: {},
   weekRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -77,10 +76,11 @@ class Calendar extends React.Component {
     onPanResponderRelease: (_, gestureState) => {
       Animated.spring(this.anim, {
         toValue:
-          gestureState.dy > MIN_CALENDAR_HEIGHT
+          gestureState.dy >= MIN_CALENDAR_HEIGHT
             ? MAX_CALENDAR_HEIGHT
             : MIN_CALENDAR_HEIGHT,
         useNativeDriver: false,
+        bounciness: 0,
       }).start();
       this.anim.flattenOffset();
     },
