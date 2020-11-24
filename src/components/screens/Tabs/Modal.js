@@ -40,7 +40,7 @@ export default function ActionModal({visible, onRequestClose}) {
     <Modal
       transparent
       visible={visible}
-      animationType="slide"
+      animationType="fade"
       onRequestClose={onRequestClose}>
       <TouchableWithoutFeedback onPress={onRequestClose}>
         <View style={styles.container} onPress={onRequestClose}>
