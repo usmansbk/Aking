@@ -10,6 +10,7 @@ import StatusBar from './StatusBar';
 import CheckBox from './CheckBox';
 import Calendar from './Calendar';
 import Footer from './Footer';
+import Avatar from './Avatar';
 
 export {
   Text,
@@ -24,4 +25,5 @@ export {
   CheckBox,
   Calendar,
   Footer,
+  Avatar,
 };

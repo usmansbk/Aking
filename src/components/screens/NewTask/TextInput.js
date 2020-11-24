@@ -79,7 +79,7 @@ export function TextField({label, ...textInputProps}) {
   );
 }
 
-export function RoundedInput({label, placeholder}) {
+export function RoundedInput({label, placeholder, ...textInputProps}) {
   const theme = useTheme();
   return (
     <View style={[styles.row]}>
@@ -97,6 +97,7 @@ export function RoundedInput({label, placeholder}) {
             paddingHorizontal: theme.spacing.l,
           },
         ]}
+        {...textInputProps}
       />
     </View>
   );

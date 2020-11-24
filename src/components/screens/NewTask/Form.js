@@ -1,14 +1,19 @@
 import React from 'react';
 import {ScrollView, View, StyleSheet} from 'react-native';
-import {Button, Text, FAB} from '@components/common';
+import {Button, Text, FAB, Avatar} from '@components/common';
 import {useTheme} from '@config/theme';
 import TextInput, {TextField, RoundedInput} from './TextInput';
 import DatePicker from './DatePicker';
+
+const members = [1, 2, 3, 4];
 
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  members: {
+    flexDirection: 'row',
   },
 });
 
@@ -46,9 +51,21 @@ export default function NewTaskForm() {
         }}>
         <Text variant="label">Add Member</Text>
         <View
-          style={{
-            paddingVertical: theme.spacing.m,
-          }}>
+          style={[
+            styles.members,
+            {
+              paddingVertical: theme.spacing.m,
+            },
+          ]}>
+          {members.map((_, index) => (
+            <View
+              key={index}
+              style={{
+                marginHorizontal: theme.spacing.s,
+              }}>
+              <Avatar size={32} />
+            </View>
+          ))}
           <FAB size={32} style={{backgroundColor: theme.colors.gray11}} />
         </View>
       </View>
