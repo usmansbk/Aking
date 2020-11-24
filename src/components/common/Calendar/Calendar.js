@@ -191,7 +191,7 @@ function MonthHeader({onPress, date = new Date(), expand}) {
             },
           ],
         }}>
-        <Icon name={'chevron-up'} size={14} />
+        <Icon name={'chevron-down'} size={14} />
       </Animated.View>
     </TouchableOpacity>
   );
