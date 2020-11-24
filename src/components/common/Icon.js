@@ -13,6 +13,7 @@ import Mark from '@assets/svgs/Mark.svg';
 import ChevronUp from '@assets/svgs/ChevronUp.svg';
 import ChevronDown from '@assets/svgs/ChevronDown.svg';
 import Dot from '@assets/svgs/Dot.svg';
+import Clip from '@assets/svgs/Clip.svg';
 import {useTheme} from '@config/theme';
 
 export default function Icon({size = 24, color, name, fillColor}) {
@@ -62,6 +63,9 @@ export default function Icon({size = 24, color, name, fillColor}) {
       break;
     case 'dot':
       Component = Dot;
+      break;
+    case 'clip':
+      Component = Clip;
       break;
     default:
       Component = ArrowLeft;

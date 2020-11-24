@@ -49,6 +49,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Demi',
     fontSize: 18,
   },
+  label: {
+    fontFamily: 'Medium',
+    fontSize: 16,
+  },
 });
 
 export default function AkingText({
