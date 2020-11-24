@@ -90,7 +90,6 @@ class Calendar extends React.Component {
     super(props);
     this.state = {
       date: getDate(),
-      expanded: true,
     };
   }
 
@@ -162,8 +161,8 @@ function WeekHeader() {
   );
 }
 
-function Weeks({date, onDateChange = () => null, dots = [], strip}) {
-  const weeks = getWeekDates(date, strip ? 1 : 6);
+function Weeks({date, onDateChange = () => null, dots = []}) {
+  const weeks = getWeekDates(date);
   return (
     <ScrollView scrollEnabled={false}>
       {weeks.map((week, index) => (
