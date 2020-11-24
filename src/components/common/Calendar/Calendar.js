@@ -29,6 +29,8 @@ const {height} = Dimensions.get('window');
 const DAY_SIZE = 48;
 const MAX_CALENDAR_HEIGHT = height * 0.38 + 8;
 const MIN_CALENDAR_HEIGHT = MAX_CALENDAR_HEIGHT / 8 + 12;
+const MIN_SWIPE_HORIZONTAL = 16;
+const MIN_DRAG_VERTICAL = 8;
 
 const styles = StyleSheet.create({
   monthHeader: {
@@ -76,8 +78,8 @@ class Calendar extends React.Component {
     },
     onPanResponderMove: (_, gestureState) => {
       const {dy} = gestureState;
-      if (Math.abs(dy) > 8) {
-        this.anim.setValue(dy + 8);
+      if (Math.abs(dy) > MIN_DRAG_VERTICAL) {
+        this.anim.setValue(dy + MIN_DRAG_VERTICAL);
       }
     },
     onPanResponderRelease: (_, gestureState) => {
@@ -92,11 +94,11 @@ class Calendar extends React.Component {
           bounciness: 0,
         }).start();
       } else {
-        if (gestureState.dx > 0) {
+        if (gestureState.dx > MIN_SWIPE_HORIZONTAL) {
           this.setState({
             date: previousMonth(this.state.date),
           });
-        } else {
+        } else if (gestureState.dx < -MIN_SWIPE_HORIZONTAL) {
           this.setState({
             date: nextMonth(this.state.date),
           });
