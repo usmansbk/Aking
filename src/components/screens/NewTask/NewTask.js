@@ -25,7 +25,13 @@ export default function NewTask({navigation}) {
   const theme = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: theme.palatte.background.main,
+        },
+      ]}>
       <Header
         title="New Task"
         backgroundColor={theme.palatte.primary.main}
@@ -35,7 +41,7 @@ export default function NewTask({navigation}) {
         iconColor={theme.palatte.background.main}
         expand
       />
-      <View style={styles.content}>
+      <View style={[styles.content]}>
         <View
           style={[
             styles.modal,
