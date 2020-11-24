@@ -18,14 +18,14 @@ import {
   isSameDay,
   getDate,
   isDateMarked,
-  nextMonth,
-  previousMonth,
+  // nextMonth,
+  // previousMonth,
 } from './utils';
 
 const {height, width} = Dimensions.get('window');
 
 const DAY_SIZE = 48;
-const MINIMUM_DRAG = 10;
+// const MINIMUM_DRAG = 10;
 const MAX_CALENDAR_HEIGHT = height * 0.38;
 const MIN_CALENDAR_HEIGHT = MAX_CALENDAR_HEIGHT / 8;
 
