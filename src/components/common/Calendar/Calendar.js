@@ -25,7 +25,7 @@ const {height} = Dimensions.get('window');
 
 const DAY_SIZE = 48;
 const MAX_CALENDAR_HEIGHT = height * 0.38 + 8;
-const MIN_CALENDAR_HEIGHT = MAX_CALENDAR_HEIGHT / 8 + 16;
+const MIN_CALENDAR_HEIGHT = MAX_CALENDAR_HEIGHT / 8 + 12;
 
 const styles = StyleSheet.create({
   monthHeader: {
