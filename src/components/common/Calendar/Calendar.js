@@ -106,7 +106,14 @@ class Calendar extends React.Component {
             paddingBottom: theme.spacing.s,
           },
         ]}>
-        <MonthHeader date={date} />
+        <MonthHeader
+          date={date}
+          expand={this.anim.interpolate({
+            inputRange: [MIN_CALENDAR_HEIGHT, MAX_CALENDAR_HEIGHT],
+            outputRange: ['0deg', '180deg'],
+            extrapolate: 'clamp',
+          })}
+        />
         <WeekHeader />
         <Animated.View
           style={[
@@ -142,7 +149,7 @@ class Calendar extends React.Component {
   }
 }
 
-function MonthHeader({onPress, date = new Date()}) {
+function MonthHeader({onPress, date = new Date(), expand}) {
   const theme = useTheme();
   return (
     <TouchableOpacity
@@ -151,7 +158,16 @@ function MonthHeader({onPress, date = new Date()}) {
       <Text variant="sectionHeader" style={{marginRight: theme.spacing.s}}>
         {formatMonth(date)}
       </Text>
-      <Icon name={'chevron-up'} size={14} />
+      <Animated.View
+        style={{
+          transform: [
+            {
+              rotateX: expand,
+            },
+          ],
+        }}>
+        <Icon name={'chevron-up'} size={14} />
+      </Animated.View>
     </TouchableOpacity>
   );
 }
