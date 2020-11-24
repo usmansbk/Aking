@@ -20,6 +20,8 @@ import {
   getDate,
   getRowIndex,
   getWeekDates,
+  nextMonth,
+  previousMonth,
 } from './utils';
 
 const {height} = Dimensions.get('window');
@@ -64,6 +66,7 @@ export default function CalendarHOC(props) {
 // so we switch to Class component
 class Calendar extends React.Component {
   anim = new Animated.Value(0);
+
   panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
@@ -72,18 +75,31 @@ class Calendar extends React.Component {
       this.anim.setOffset(this.anim._value);
     },
     onPanResponderMove: (_, gestureState) => {
-      this.anim.setValue(gestureState.dy);
+      const {dy} = gestureState;
+      this.anim.setValue(dy);
     },
     onPanResponderRelease: (_, gestureState) => {
       this.anim.flattenOffset();
-      Animated.spring(this.anim, {
-        toValue:
-          gestureState.dy >= MIN_CALENDAR_HEIGHT
-            ? MAX_CALENDAR_HEIGHT
-            : MIN_CALENDAR_HEIGHT,
-        useNativeDriver: false,
-        bounciness: 0,
-      }).start();
+      if (Math.abs(gestureState.dy) > Math.abs(gestureState.dx)) {
+        Animated.spring(this.anim, {
+          toValue:
+            gestureState.dy >= MIN_CALENDAR_HEIGHT
+              ? MAX_CALENDAR_HEIGHT
+              : MIN_CALENDAR_HEIGHT,
+          useNativeDriver: false,
+          bounciness: 0,
+        }).start();
+      } else {
+        if (gestureState.dx > 0) {
+          this.setState({
+            date: previousMonth(this.state.date),
+          });
+        } else {
+          this.setState({
+            date: nextMonth(this.state.date),
+          });
+        }
+      }
     },
   });
 
