@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function TextField({placeholder}) {
+export default function TextField({placeholder, ...textInputProps}) {
   const theme = useTheme();
   return (
     <TextInput
@@ -23,6 +23,7 @@ export default function TextField({placeholder}) {
           paddingHorizontal: theme.spacing.l,
         },
       ]}
+      {...textInputProps}
     />
   );
 }
