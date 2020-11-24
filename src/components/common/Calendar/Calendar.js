@@ -87,6 +87,17 @@ class Calendar extends React.Component {
     },
   });
 
+  _expandAnimation = () => {
+    Animated.spring(this.anim, {
+      toValue:
+        this.anim._value > MIN_CALENDAR_HEIGHT
+          ? MIN_CALENDAR_HEIGHT
+          : MAX_CALENDAR_HEIGHT,
+      useNativeDriver: false,
+      bounciness: 0,
+    }).start();
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -108,6 +119,7 @@ class Calendar extends React.Component {
         ]}>
         <MonthHeader
           date={date}
+          onPress={this._expandAnimation}
           expand={this.anim.interpolate({
             inputRange: [MIN_CALENDAR_HEIGHT, MAX_CALENDAR_HEIGHT],
             outputRange: ['0deg', '180deg'],
