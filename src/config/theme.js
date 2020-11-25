@@ -89,6 +89,7 @@ export const theme = {
   shape: {
     radius: 4,
     elevation: 4,
+    inputRadius: 5,
   },
 };
 

@@ -73,10 +73,12 @@ export default function AkingText({
   color = 'main',
   style = {},
   numberOfLines,
+  ellipsizeMode,
 }) {
   const theme = useTheme();
   return (
     <Text
+      ellipsizeMode={ellipsizeMode}
       numberOfLines={numberOfLines}
       style={[styles[variant], {color: theme.palatte.text[color]}, style]}>
       {children}

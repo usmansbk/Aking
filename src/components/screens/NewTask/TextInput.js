@@ -19,12 +19,78 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  rounded: {
+  roundedInput: {
     fontFamily: 'Medium',
     fontSize: 14,
-    maxWidth: 100,
+  },
+  roundedText: {
+    width: 65,
+  },
+  chip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: 130,
   },
 });
+
+export function RoundedInput({
+  label,
+  placeholder,
+  leftImage,
+  item,
+  ...textInputProps
+}) {
+  const theme = useTheme();
+  return (
+    <View style={styles.row}>
+      <Text
+        variant="label"
+        style={{
+          marginRight: theme.spacing.m,
+        }}>
+        {label}
+      </Text>
+      {item ? (
+        <View
+          style={[
+            styles.chip,
+            {
+              height: theme.spacing.space(6),
+              borderRadius: theme.spacing.space(3),
+              backgroundColor: theme.palatte.textInput.background,
+            },
+          ]}>
+          <Avatar size={theme.spacing.space(6)} />
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={1}
+            style={[
+              styles.roundedText,
+              {
+                marginLeft: theme.spacing.s,
+              },
+            ]}>
+            {item.title}
+          </Text>
+        </View>
+      ) : (
+        <TextInput
+          style={[
+            styles.roundedInput,
+            {
+              height: theme.spacing.space(6),
+              padding: theme.spacing.l,
+              borderRadius: theme.spacing.space(3),
+              backgroundColor: theme.palatte.textInput.background,
+            },
+          ]}
+          placeholder={placeholder}
+          {...textInputProps}
+        />
+      )}
+    </View>
+  );
+}
 
 export default function Input({placeholder, ...textInputProps}) {
   const theme = useTheme();
@@ -75,44 +141,6 @@ export function TextField({label, ...textInputProps}) {
           ]}>
           <IconButton name="clip" color={theme.colors.gray7} />
         </View>
-      </View>
-    </View>
-  );
-}
-
-export function RoundedInput({
-  label,
-  placeholder,
-  leftImage,
-  ...textInputProps
-}) {
-  const theme = useTheme();
-  return (
-    <View style={[styles.row, styles.roundedContainer]}>
-      <Text variant="label">{label}</Text>
-      <View
-        style={[
-          styles.row,
-          {
-            height: theme.spacing.space(6),
-            backgroundColor: theme.palatte.textInput.background,
-            marginHorizontal: theme.spacing.m,
-            borderRadius: theme.spacing.xl,
-          },
-        ]}>
-        {leftImage && <Avatar size={44} />}
-        <TextInput
-          placeholder={placeholder}
-          style={[
-            styles.rounded,
-            styles.textInput,
-            {
-              marginHorizontal: theme.spacing.s,
-              paddingHorizontal: theme.spacing.m,
-            },
-          ]}
-          {...textInputProps}
-        />
       </View>
     </View>
   );

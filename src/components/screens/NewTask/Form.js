@@ -6,7 +6,7 @@ import TextInput, {TextField, RoundedInput} from './TextInput';
 import DatePicker from './DatePicker';
 import Dropdown from './Dropdown';
 
-const members = [1, 2, 3, 4];
+const members = new Array(4).fill(1);
 
 const styles = StyleSheet.create({
   container: {
@@ -14,17 +14,18 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
     justifyContent: 'space-between',
   },
   members: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
   },
 });
 
 const users = [
   {
-    title: 'Stephen Chow',
+    title: 'Stephen Chow Pow Tow pao adkw w',
     subtitle: 'Stephenchow@company.com',
     url: 'https://',
   },
@@ -53,15 +54,20 @@ export default function NewTaskForm() {
         <RoundedInput
           label="For"
           placeholder="Assignee"
-          value={assignee?.title}
-          leftImage={assignee?.url}
+          item={assignee}
           onFocus={() => setResultVisible(true)}
           onBlur={() => setResultVisible(false)}
         />
         <RoundedInput label="In" placeholder="Project" />
       </View>
       {showResult ? (
-        <Dropdown data={users} onSelect={(item) => setAssignee(item)} />
+        <Dropdown
+          data={users}
+          onSelect={(item) => {
+            setAssignee(item);
+            setResultVisible(false);
+          }}
+        />
       ) : (
         <>
           <TextInput placeholder="Title" />
@@ -90,7 +96,7 @@ export default function NewTaskForm() {
                 <View
                   key={index}
                   style={{
-                    marginHorizontal: theme.spacing.s,
+                    margin: theme.spacing.s,
                   }}>
                   <Avatar size={32} />
                 </View>
