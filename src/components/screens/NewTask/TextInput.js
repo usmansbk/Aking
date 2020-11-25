@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   rounded: {
     fontFamily: 'Medium',
     fontSize: 14,
-    maxWidth: 90,
+    maxWidth: 100,
   },
 });
 
@@ -108,6 +108,7 @@ export function RoundedInput({
             styles.textInput,
             {
               marginHorizontal: theme.spacing.s,
+              paddingHorizontal: theme.spacing.m,
             },
           ]}
           {...textInputProps}
