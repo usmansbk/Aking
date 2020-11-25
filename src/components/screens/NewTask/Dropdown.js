@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Dropdown({data}) {
+export default function Dropdown({data, onSelect}) {
   const theme = useTheme();
   return (
     <View
@@ -27,17 +27,17 @@ export default function Dropdown({data}) {
         },
       ]}>
       {data.map((item, index) => (
-        <Item key={index} {...item} />
+        <Item key={index} {...item} onPress={() => onSelect(item)} />
       ))}
     </View>
   );
 }
 
-const Item = ({title, subtitle}) => {
+const Item = ({title, subtitle, onPress}) => {
   const theme = useTheme();
 
   return (
-    <RectButton>
+    <RectButton onPress={onPress}>
       <View
         style={[
           styles.itemContainer,

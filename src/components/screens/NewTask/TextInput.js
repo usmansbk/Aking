@@ -1,6 +1,6 @@
 import React from 'react';
 import {TextInput, StyleSheet, View} from 'react-native';
-import {Text, IconButton} from '@components/common';
+import {Text, IconButton, Avatar} from '@components/common';
 import {useTheme} from '@config/theme';
 
 const styles = StyleSheet.create({
@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
   rounded: {
     fontFamily: 'Medium',
     fontSize: 14,
+  },
+  roundedTextInput: {
+    width: 90,
   },
 });
 
@@ -79,26 +82,40 @@ export function TextField({label, ...textInputProps}) {
   );
 }
 
-export function RoundedInput({label, placeholder, ...textInputProps}) {
+export function RoundedInput({
+  label,
+  placeholder,
+  leftImage,
+  ...textInputProps
+}) {
   const theme = useTheme();
   return (
-    <View style={[styles.row]}>
+    <View style={[styles.row, styles.roundedContainer]}>
       <Text variant="label">{label}</Text>
-      <TextInput
-        placeholder={placeholder}
+      <View
         style={[
-          styles.rounded,
-          styles.textInput,
+          styles.row,
           {
             height: theme.spacing.space(6),
             backgroundColor: theme.palatte.textInput.background,
-            marginHorizontal: theme.spacing.l,
+            marginHorizontal: theme.spacing.m,
             borderRadius: theme.spacing.xl,
-            paddingHorizontal: theme.spacing.l,
           },
-        ]}
-        {...textInputProps}
-      />
+        ]}>
+        {leftImage && <Avatar size={44} />}
+        <TextInput
+          placeholder={placeholder}
+          style={[
+            styles.rounded,
+            styles.textInput,
+            styles.roundedTextInput,
+            {
+              marginHorizontal: theme.spacing.m,
+            },
+          ]}
+          {...textInputProps}
+        />
+      </View>
     </View>
   );
 }

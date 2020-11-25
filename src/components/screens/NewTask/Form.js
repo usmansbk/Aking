@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
   },
   members: {
@@ -25,12 +26,15 @@ const users = [
   {
     title: 'Stephen Chow',
     subtitle: 'Stephenchow@company.com',
+    url: 'https://',
   },
 ];
 
 export default function NewTaskForm() {
   const theme = useTheme();
   const [showResult, setResultVisible] = useState(false);
+  const [assignee, setAssignee] = useState(null);
+
   return (
     <ScrollView
       contentContainerStyle={[
@@ -43,20 +47,21 @@ export default function NewTaskForm() {
         style={[
           styles.row,
           {
-            paddingHorizontal: theme.spacing.l,
-            paddingBottom: theme.spacing.xl,
+            padding: theme.spacing.l,
           },
         ]}>
         <RoundedInput
           label="For"
           placeholder="Assignee"
+          value={assignee?.title}
+          leftImage={assignee?.url}
           onFocus={() => setResultVisible(true)}
           onBlur={() => setResultVisible(false)}
         />
         <RoundedInput label="In" placeholder="Project" />
       </View>
       {showResult ? (
-        <Dropdown data={users} />
+        <Dropdown data={users} onSelect={(item) => setAssignee(item)} />
       ) : (
         <>
           <TextInput placeholder="Title" />
