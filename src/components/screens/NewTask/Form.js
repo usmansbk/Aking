@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
 const users = [
   {
-    title: 'Stephen Chow Pow Tow pao adkw w',
+    title: 'Stephen Chow',
     subtitle: 'Stephenchow@company.com',
     url: 'https://',
   },
